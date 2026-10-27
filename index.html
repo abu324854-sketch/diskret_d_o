@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xaffman Kodlash va Ma'lumotlarni Siqish Laboratoriyasi</title>
+    <title>Xaffman Kodlash va Siqish Laboratoriyasi</title>
     <style>
         :root {
-            --bg-primary: #0b0f19;
+            --bg-primary: #090d16;
             --bg-secondary: #111827;
             --bg-card: #1f2937;
-            --text-main: #f9fafb;
+            --text-main: #f3f4f6;
             --text-muted: #9ca3af;
             --accent-green: #10b981;
             --accent-blue: #3b82f6;
@@ -28,100 +28,132 @@
         body {
             background-color: var(--bg-primary);
             color: var(--text-main);
-            padding: 24px;
+            padding: 20px;
             line-height: 1.6;
         }
 
-        .header {
-            background: linear-gradient(135deg, #1f2937, #111827);
+        /* Yuqori Sarlavha Oynasi */
+        .window-header {
+            background: linear-gradient(135deg, #1f2937, #0f172a);
             border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 24px 30px;
-            margin-bottom: 24px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6);
+            border-radius: 12px;
+            padding: 20px 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 20px;
+            gap: 15px;
         }
 
         .header-title h1 {
-            font-size: 24px;
+            font-size: 22px;
             color: #60a5fa;
             margin-bottom: 4px;
         }
 
         .header-title p {
             color: var(--text-muted);
-            font-size: 13px;
+            font-size: 12px;
         }
 
-        .authors-card {
-            background-color: var(--bg-card);
+        .authors-box {
+            background-color: var(--bg-secondary);
             border: 1px solid var(--accent-purple);
-            padding: 12px 20px;
-            border-radius: 10px;
-            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
+            padding: 10px 16px;
+            border-radius: 8px;
         }
 
-        .authors-card h3 {
-            font-size: 11px;
+        .authors-box h3 {
+            font-size: 10px;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--accent-purple);
-            margin-bottom: 4px;
+            margin-bottom: 2px;
         }
 
-        .authors-card p {
+        .authors-box p {
             font-weight: 600;
-            font-size: 14px;
+            font-size: 13px;
             color: #fff;
         }
 
-        .grid-layout {
+        /* Ovozli yordamchi tugmasi uchun panel */
+        .voice-control-bar {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--accent-green);
+            border-radius: 10px;
+            padding: 12px 20px;
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .voice-control-bar span {
+            font-size: 13px;
+            color: var(--accent-green);
+            font-weight: 600;
+        }
+
+        /* Ko'p oynali Grid tartibi */
+        .multi-window-grid {
             display: grid;
-            grid-template-columns: 1fr 1.1fr;
-            gap: 24px;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
         }
 
         @media (max-width: 1024px) {
-            .grid-layout {
+            .multi-window-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        .card {
+        /* Oyna (Window) dizayni */
+        .window-pane {
             background-color: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 14px;
-            padding: 20px;
-            margin-bottom: 24px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         }
 
-        .card-title {
-            font-size: 17px;
+        .window-titlebar {
+            background-color: var(--bg-card);
+            padding: 10px 16px;
+            font-size: 14px;
             font-weight: 600;
-            margin-bottom: 14px;
             color: #38bdf8;
+            border-bottom: 1px solid var(--border-color);
             display: flex;
             align-items: center;
             justify-content: space-between;
         }
 
+        .window-body {
+            padding: 16px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
         textarea {
             width: 100%;
-            height: 100px;
+            height: 90px;
             background-color: var(--bg-primary);
             border: 1px solid var(--border-color);
             border-radius: 8px;
             color: var(--text-main);
-            padding: 12px;
-            font-size: 14px;
+            padding: 10px;
+            font-size: 13px;
             resize: vertical;
             outline: none;
-            transition: border-color 0.2s;
         }
 
         textarea:focus {
@@ -130,8 +162,7 @@
 
         .btn-group {
             display: flex;
-            gap: 10px;
-            margin-top: 12px;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
@@ -139,15 +170,15 @@
             background-color: var(--accent-blue);
             color: white;
             border: none;
-            padding: 10px 16px;
-            border-radius: 8px;
+            padding: 8px 14px;
+            border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 13px;
+            font-size: 12px;
             transition: all 0.2s;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 5px;
         }
 
         button:hover {
@@ -169,54 +200,63 @@
             background-color: var(--accent-orange);
         }
 
+        button.btn-danger {
+            background-color: #ef4444;
+        }
+
+        /* Analitika metriclar */
         .metrics-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
-            gap: 10px;
-            margin-top: 14px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+        }
+
+        @media (max-width: 768px) {
+            .metrics-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         .metric-box {
             background-color: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 10px;
+            border-radius: 6px;
+            padding: 8px;
             text-align: center;
         }
 
         .metric-box label {
             display: block;
-            font-size: 10px;
+            font-size: 9px;
             color: var(--text-muted);
             text-transform: uppercase;
-            margin-bottom: 4px;
-            letter-spacing: 0.5px;
+            margin-bottom: 2px;
         }
 
         .metric-box span {
-            font-size: 16px;
+            font-size: 14px;
             font-weight: 700;
             color: var(--accent-green);
         }
 
+        /* Jadval oynasi */
         .table-container {
             overflow-x: auto;
-            max-height: 220px;
+            max-height: 180px;
             overflow-y: auto;
-            margin-top: 14px;
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 6px;
         }
 
         table {
             width: 100%;
             border-collapse: collapse;
             text-align: left;
-            font-size: 13px;
+            font-size: 12px;
         }
 
         th, td {
-            padding: 9px 12px;
+            padding: 7px 10px;
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -225,19 +265,20 @@
             color: var(--text-muted);
             position: sticky;
             top: 0;
-            z-index: 10;
+            z-index: 5;
         }
 
         tr:hover {
             background-color: rgba(255, 255, 255, 0.02);
         }
 
+        /* Daraxt vizualizatsiya oynasi */
         .tree-container {
             width: 100%;
-            height: 480px;
+            height: 380px;
             background-color: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 6px;
             overflow: hidden;
             position: relative;
         }
@@ -251,7 +292,6 @@
             fill: var(--bg-card);
             stroke: var(--accent-blue);
             stroke-width: 2px;
-            transition: all 0.3s;
         }
 
         .node.leaf circle {
@@ -261,7 +301,7 @@
 
         .node text {
             fill: var(--text-main);
-            font-size: 11px;
+            font-size: 10px;
             font-weight: 600;
             text-anchor: middle;
             dominant-baseline: central;
@@ -275,7 +315,7 @@
 
         .link-label {
             fill: var(--accent-orange);
-            font-size: 11px;
+            font-size: 10px;
             font-weight: bold;
             text-anchor: middle;
         }
@@ -287,25 +327,25 @@
         .code-output {
             background-color: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
-            padding: 12px;
+            border-radius: 6px;
+            padding: 10px;
             font-family: monospace;
             word-break: break-all;
-            max-height: 100px;
+            max-height: 75px;
             overflow-y: auto;
             color: var(--accent-orange);
-            font-size: 12px;
+            font-size: 11px;
         }
 
         .copy-btn {
             position: absolute;
-            top: 6px;
-            right: 6px;
+            top: 4px;
+            right: 4px;
             background: var(--bg-card);
             border: 1px solid var(--border-color);
             color: var(--text-muted);
-            font-size: 10px;
-            padding: 4px 8px;
+            font-size: 9px;
+            padding: 3px 6px;
             border-radius: 4px;
             cursor: pointer;
         }
@@ -322,37 +362,53 @@
 </head>
 <body>
 
-    <div class="header">
+    <!-- 1. Sarlavha Oynasi -->
+    <div class="window-header">
         <div class="header-title">
             <h1>Xaffman Kodlash va Ma'lumotlarni Siqish Laboratoriyasi</h1>
             <p>Ierarxik Daraxtlar va Optimal Kodlash Nazariyasi Bo'yicha Kurs Ishi Loyihasi</p>
         </div>
-        <div class="authors-card">
+        <div class="authors-box">
             <h3>Bajaruvchilar:</h3>
-            <p>Muhammadiv Diyorbek</p>
-            <p>Mirzaliyev Oyatullo</p>
+            <p>Muhammadiv Diyorbek & Mirzaliyev Oyatullo</p>
         </div>
     </div>
 
-    <div class="grid-layout">
-        <!-- Chap panel: Kiritish, Boshqarish va Analitika -->
-        <div>
-            <div class="card">
-                <div class="card-title">
-                    <span>1. Ma'lumotlarni Kiritish</span>
-                    <button class="btn-secondary" style="padding: 4px 10px; font-size: 11px;" onclick="document.getElementById('fileInput').click()">📁 Fayldan O'qish</button>
-                    <input type="file" id="fileInput" class="file-input-wrapper" accept=".txt" onchange="handleFileUpload(event)">
-                </div>
-                <textarea id="inputText" placeholder="Kodlash uchun matn kiriting...">Xaffman kodlash algoritmi ma'lumotlarni yo'qotishsiz siqishda eng samarali ierarxik daraxt tuzilmasini qo'llaydi.</textarea>
+    <!-- Ovozli Tushuntirish Paneli -->
+    <div class="voice-control-bar">
+        <span>🤖 AI Ovozli Yordamchi: Loyihani o'zbek tilida tinglash uchun tugmani bosing</span>
+        <div class="btn-group">
+            <button class="btn-success" onclick="playVoiceExplanation()">🔊 Ovozli Tushuntirishni Boshlash</button>
+            <button class="btn-danger" onclick="stopVoiceExplanation()">⏹ To'xtatish</button>
+        </div>
+    </div>
+
+    <!-- Ko'p Oynali Grid Tizimi -->
+    <div class="multi-window-grid">
+        
+        <!-- OYNA 1: Ma'lumotlarni Kiritish va Boshqarish -->
+        <div class="window-pane">
+            <div class="window-titlebar">
+                <span>📂 1-Oyna: Ma'lumotlarni Kiritish va Boshqarish</span>
+                <button class="btn-secondary" style="padding: 2px 8px; font-size: 10px;" onclick="document.getElementById('fileInput').click()">Fayldan O'qish</button>
+                <input type="file" id="fileInput" class="file-input-wrapper" accept=".txt" onchange="handleFileUpload(event)">
+            </div>
+            <div class="window-body">
+                <textarea id="inputText" placeholder="Kodlash uchun matn kiriting...">Xaffman kodlash algoritmi ierarxik daraxtlar va optimal siqish nazariyasiga tayanadi.</textarea>
                 <div class="btn-group">
                     <button onclick="processHuffman()">🚀 Daraxt Qurish & Siqish</button>
                     <button class="btn-secondary" onclick="loadSampleText()">✨ Namuna Matn</button>
                     <button class="btn-warning" onclick="exportReport()">📥 Hisobotni Yuklab Olish</button>
                 </div>
             </div>
+        </div>
 
-            <div class="card">
-                <div class="card-title">2. Axborot-Nazariy Analitika & Chastotalar</div>
+        <!-- OYNA 2: Axborot-Nazariy Analitika va Chastotalar -->
+        <div class="window-pane">
+            <div class="window-titlebar">
+                <span>📊 2-Oyna: Axborot-Nazariy Analitika</span>
+            </div>
+            <div class="window-body">
                 <div class="metrics-grid">
                     <div class="metric-box">
                         <label>Asl O'lcham</label>
@@ -389,37 +445,43 @@
                     </table>
                 </div>
             </div>
-
-            <div class="card">
-                <div class="card-title">3. Binar Stream & Dekodlash Tekshiruvi</div>
-                
-                <label style="font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 4px; text-transform: uppercase;">SIQILGAN BITSTREAM (0 va 1 lar):</label>
-                <div class="code-output-wrapper">
-                    <div class="code-output" id="binaryStream">-</div>
-                    <button class="copy-btn" onclick="copyToClipboard('binaryStream')">Nusxa olish</button>
-                </div>
-
-                <br>
-                <label style="font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 4px; text-transform: uppercase;">QAYTA TIKLANGAN MATN (DEKODLANGAN):</label>
-                <div class="code-output-wrapper">
-                    <div class="code-output" id="decodedText" style="color: var(--accent-green);">-</div>
-                    <button class="copy-btn" onclick="copyToClipboard('decodedText')">Nusxa olish</button>
-                </div>
-            </div>
         </div>
 
-        <!-- O'ng panel: Vizualizatsiya -->
-        <div>
-            <div class="card">
-                <div class="card-title">4. Interaktiv Xaffman Ierarxik Daraxti</div>
-                <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">
-                    Yashil tugunlar matndagi belgilar (barglar), kulrang tugunlar chastotalar yig'indisini bildiruvchi ota-tugunlar.
+        <!-- OYNA 3: Interaktiv Xaffman Ierarxik Daraxti -->
+        <div class="window-pane">
+            <div class="window-titlebar">
+                <span>🌳 3-Oyna: Interaktiv Xaffman Ierarxik Daraxti</span>
+            </div>
+            <div class="window-body">
+                <p style="font-size: 11px; color: var(--text-muted);">
+                    Yashil tugunlar — matndagi belgilar (barglar), kulrang tugunlar chastotalar yig'indisini bildiruvchi ota-tugunlar.
                 </p>
                 <div class="tree-container">
                     <svg id="treeSvg"></svg>
                 </div>
             </div>
         </div>
+
+        <!-- OYNA 4: Binar Stream va Dekodlash Tekshiruvi -->
+        <div class="window-pane">
+            <div class="window-titlebar">
+                <span>⚡ 4-Oyna: Binar Stream va Dekodlash Tekshiruvi</span>
+            </div>
+            <div class="window-body">
+                <label style="font-size: 10px; color: var(--text-muted); text-transform: uppercase;">SIQILGAN BITSTREAM (0 va 1 lar):</label>
+                <div class="code-output-wrapper">
+                    <div class="code-output" id="binaryStream">-</div>
+                    <button class="copy-btn" onclick="copyToClipboard('binaryStream')">Nusxa</button>
+                </div>
+
+                <label style="font-size: 10px; color: var(--text-muted); text-transform: uppercase; margin-top: 4px;">QAYTA TIKLANGAN MATN (DEKODLANGAN):</label>
+                <div class="code-output-wrapper">
+                    <div class="code-output" id="decodedText" style="color: var(--accent-green);">-</div>
+                    <button class="copy-btn" onclick="copyToClipboard('decodedText')">Nusxa</button>
+                </div>
+            </div>
+        </div>
+
     </div>
 
     <script>
@@ -554,7 +616,6 @@
 
             const decoded = decodeStream(root, encodedStream);
 
-            // Global obyektga saqlash (eksport uchun)
             globalCurrentData = {
                 text, codes, freqMap, binaryStream: encodedStream, decodedText: decoded, compressedBits, originalBits
             };
@@ -579,14 +640,14 @@
 
             if (!root) return;
 
-            const svgWidth = svg.clientWidth || 600;
-            const svgHeight = svg.clientHeight || 480;
+            const svgWidth = svg.clientWidth || 500;
+            const svgHeight = svg.clientHeight || 380;
 
             function calculatePositions(node, depth = 0, leftBoundary = 0, rightBoundary = svgWidth) {
                 if (!node) return [];
 
                 const x = (leftBoundary + rightBoundary) / 2;
-                const y = 45 + depth * 60;
+                const y = 35 + depth * 55;
 
                 node.x = x;
                 node.y = y;
@@ -628,7 +689,7 @@
                 svg.appendChild(line);
 
                 const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-                text.setAttribute("x", (x1 + x2) / 2 + (label === "0" ? -10 : 10));
+                text.setAttribute("x", (x1 + x2) / 2 + (label === "0" ? -8 : 8));
                 text.setAttribute("y", (y1 + y2) / 2);
                 text.setAttribute("class", "link-label");
                 text.textContent = label;
@@ -645,7 +706,7 @@
                 const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
                 circle.setAttribute("cx", x);
                 circle.setAttribute("cy", y);
-                circle.setAttribute("r", isLeaf ? 17 : 15);
+                circle.setAttribute("r", isLeaf ? 15 : 13);
 
                 const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
                 text.setAttribute("x", x);
@@ -661,7 +722,7 @@
         }
 
         function loadSampleText() {
-            document.getElementById('inputText').value = "Muhammadiv Diyorbek va Mirzaliyev Oyatullo — Xaffman Algoritmi Kurs Ishi Loyihasi!";
+            document.getElementById('inputText').value = "Muhammadiv Diyorbek va Mirzaliyev Oyatullo Xaffman Algoritmi Kurs Ishi";
             processHuffman();
         }
 
@@ -708,6 +769,40 @@
             a.download = 'Xaffman_Hisobot_Diyorbek_Oyatullo.txt';
             a.click();
             URL.revokeObjectURL(url);
+        }
+
+        // Ovozli Tushuntirish funksiyasi (Web Speech API)
+        function playVoiceExplanation() {
+            if (!('speechSynthesis' in window)) {
+                alert("Sizning brauzeringiz ovozli sintezni qo'llab-quvvatlamaydi.");
+                return;
+            }
+
+            window.speechSynthesis.cancel(); // Avvalgi ovozni to'xtatish
+
+            const explanationText = `
+                Assalomu alaykum ustoz. Ushbu kurs ishi loyihasi Muhammadiv Diyorbek va Mirzaliyev Oyatullo tomonidan bajarilgan.
+                Loyiha Xaffman kodlash va ma'lumotlarni siqish ierarxik daraxti deb ataladi.
+                Birinchi oynada matn kiritiladi yoki matnli fayl yuklanadi.
+                Ikkinchi oynada harflarning uchrash chastotalari, ehtimolliklari va axborot entropiya qiymati hisoblanadi.
+                Uchinchi oynada Min-Heap algoritmi asosida qurilgan interaktiv xaffman daraxti vizual tarzda ko'rsatiladi. Chap tarmoqlarga nol, o'ng tarmoqlarga bir qiymatlari berilib optimal kodlar hosil qilinadi.
+                To'rtinchi oynada esa matnning ikkilik bitstream ko'rinishi va uni yana asl holatiga xatosiz dekodlash jarayoni namoyish etiladi.
+                E'tiboringiz uchun rahmat!
+            `;
+
+            const utterance = new SpeechSynthesisUtterance(explanationText);
+            utterance.lang = 'uz-UZ'; // O'zbek tili
+            utterance.rate = 0.95; // O'qish tezligi
+            utterance.pitch = 1.0;
+
+            // Agar uz-UZ topilmasa tr-TR yoki ru-RU o'rniga umumiy o'qishga harakat qiladi
+            window.speechSynthesis.speak(utterance);
+        }
+
+        function stopVoiceExplanation() {
+            if ('speechSynthesis' in window) {
+                window.speechSynthesis.cancel();
+            }
         }
 
         window.onload = function() {
