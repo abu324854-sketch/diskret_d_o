@@ -554,7 +554,7 @@
         }
 
         function loadSampleText() {
-            document.getElementById('inputText').value = "Muhammadiv Diyorbek va Mirzaliyev Oyatullo Xaffman Algoritmi Kurs Ishi";
+            document.getElementById('inputText').value = "Muhammadov Diyorbek va Mirzaliyev Oyatillo Xaffman Algoritmi Kurs Ishi";
             processHuffman();
         }
 
@@ -567,14 +567,14 @@
         }
 
         function exportReport() {
-            let txt = `XAFFMAN HISOBOTI\nMualliflar: Muhammadiv Diyorbek & Mirzaliyev Oyatullo\nAsl hajm: ${globalData.originalBits} bit\nSiqilgan hajm: ${globalData.compressedBits} bit\nStream: ${globalData.binaryStream}`;
+            let txt = `XAFFMAN HISOBOTI\nMualliflar: Muhammadov Diyorbek & Mirzaliyev Oyatillo\nAsl hajm: ${globalData.originalBits} bit\nSiqilgan hajm: ${globalData.compressedBits} bit\nStream: ${globalData.binaryStream}`;
             const b = new Blob([txt], { type: 'text/plain' });
             const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'Xaffman_Hisobot.txt'; a.click();
         }
 
         // KAFOLATLANGAN TELEFON VA KOMPYUTER OVOZLI YORDAMCHISI
         const speechParagraphs = [
-            "Assalomu alaykum ustoz. Ushbu kurs ishi loyihasi Muhammadiv Diyorbek va Mirzaliyev Oyatullo tomonidan bajarilgan.",
+            "Assalomu alaykum ustoz. Ushbu kurs ishi loyihasi Muhammadov Diyorbek va Mirzaliyev Oyatillo tomonidan bajarilgan.",
             "Loyiha ma'lumotlarni siqish uchun Xaffman kodlash ierarxik daraxtini qurish deb ataladi.",
             "Birinchi oynada matn kiritiladi. Ikkinchi oynada harflarning uchrash chastotalari va axborot entropiyasi hisoblanadi.",
             "Uchinchi oynada Min-Heap algoritmi asosida qurilgan interaktiv Xaffman daraxti visual ko'rsatiladi.",
