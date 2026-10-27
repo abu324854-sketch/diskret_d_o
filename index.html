@@ -3,19 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xaffman Kodlash Daraxti va Ma'lumotlarni Siqish Laboratoriyasi</title>
+    <title>Xaffman Kodlash va Ma'lumotlarni Siqish Laboratoriyasi</title>
     <style>
         :root {
-            --bg-primary: #0f172a;
-            --bg-secondary: #1e293b;
-            --bg-card: #334155;
-            --text-main: #f8fafc;
-            --text-muted: #94a3b8;
+            --bg-primary: #0b0f19;
+            --bg-secondary: #111827;
+            --bg-card: #1f2937;
+            --text-main: #f9fafb;
+            --text-muted: #9ca3af;
             --accent-green: #10b981;
             --accent-blue: #3b82f6;
             --accent-purple: #8b5cf6;
             --accent-orange: #f59e0b;
-            --border-color: #475569;
+            --border-color: #374151;
         }
 
         * {
@@ -28,17 +28,17 @@
         body {
             background-color: var(--bg-primary);
             color: var(--text-main);
-            padding: 20px;
-            line-height: 1.5;
+            padding: 24px;
+            line-height: 1.6;
         }
 
         .header {
-            background: linear-gradient(135deg, #1e293b, #0f172a);
+            background: linear-gradient(135deg, #1f2937, #111827);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
-            padding: 24px;
+            border-radius: 14px;
+            padding: 24px 30px;
             margin-bottom: 24px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.6);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -47,25 +47,26 @@
         }
 
         .header-title h1 {
-            font-size: 26px;
+            font-size: 24px;
             color: #60a5fa;
-            margin-bottom: 6px;
+            margin-bottom: 4px;
         }
 
         .header-title p {
             color: var(--text-muted);
-            font-size: 14px;
+            font-size: 13px;
         }
 
         .authors-card {
             background-color: var(--bg-card);
             border: 1px solid var(--accent-purple);
             padding: 12px 20px;
-            border-radius: 8px;
+            border-radius: 10px;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.15);
         }
 
         .authors-card h3 {
-            font-size: 13px;
+            font-size: 11px;
             text-transform: uppercase;
             letter-spacing: 1px;
             color: var(--accent-purple);
@@ -74,13 +75,13 @@
 
         .authors-card p {
             font-weight: 600;
-            font-size: 15px;
+            font-size: 14px;
             color: #fff;
         }
 
         .grid-layout {
             display: grid;
-            grid-template-columns: 1fr 1.2fr;
+            grid-template-columns: 1fr 1.1fr;
             gap: 24px;
         }
 
@@ -93,24 +94,25 @@
         .card {
             background-color: var(--bg-secondary);
             border: 1px solid var(--border-color);
-            border-radius: 12px;
+            border-radius: 14px;
             padding: 20px;
             margin-bottom: 24px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
         }
 
         .card-title {
-            font-size: 18px;
+            font-size: 17px;
             font-weight: 600;
-            margin-bottom: 16px;
+            margin-bottom: 14px;
             color: #38bdf8;
             display: flex;
             align-items: center;
-            gap: 8px;
+            justify-content: space-between;
         }
 
         textarea {
             width: 100%;
-            height: 110px;
+            height: 100px;
             background-color: var(--bg-primary);
             border: 1px solid var(--border-color);
             border-radius: 8px;
@@ -130,17 +132,22 @@
             display: flex;
             gap: 10px;
             margin-top: 12px;
+            flex-wrap: wrap;
         }
 
         button {
             background-color: var(--accent-blue);
             color: white;
             border: none;
-            padding: 10px 18px;
-            border-radius: 6px;
+            padding: 10px 16px;
+            border-radius: 8px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 13px;
             transition: all 0.2s;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
         }
 
         button:hover {
@@ -154,40 +161,49 @@
             border: 1px solid var(--border-color);
         }
 
+        button.btn-success {
+            background-color: var(--accent-green);
+        }
+
+        button.btn-warning {
+            background-color: var(--accent-orange);
+        }
+
         .metrics-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
-            gap: 12px;
-            margin-top: 16px;
+            grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+            gap: 10px;
+            margin-top: 14px;
         }
 
         .metric-box {
             background-color: var(--bg-primary);
             border: 1px solid var(--border-color);
             border-radius: 8px;
-            padding: 12px;
+            padding: 10px;
             text-align: center;
         }
 
         .metric-box label {
             display: block;
-            font-size: 11px;
+            font-size: 10px;
             color: var(--text-muted);
             text-transform: uppercase;
             margin-bottom: 4px;
+            letter-spacing: 0.5px;
         }
 
         .metric-box span {
-            font-size: 18px;
+            font-size: 16px;
             font-weight: 700;
             color: var(--accent-green);
         }
 
         .table-container {
             overflow-x: auto;
-            max-height: 250px;
+            max-height: 220px;
             overflow-y: auto;
-            margin-top: 16px;
+            margin-top: 14px;
             border: 1px solid var(--border-color);
             border-radius: 8px;
         }
@@ -200,7 +216,7 @@
         }
 
         th, td {
-            padding: 10px 12px;
+            padding: 9px 12px;
             border-bottom: 1px solid var(--border-color);
         }
 
@@ -209,10 +225,11 @@
             color: var(--text-muted);
             position: sticky;
             top: 0;
+            z-index: 10;
         }
 
         tr:hover {
-            background-color: rgba(255, 255, 255, 0.03);
+            background-color: rgba(255, 255, 255, 0.02);
         }
 
         .tree-container {
@@ -244,7 +261,7 @@
 
         .node text {
             fill: var(--text-main);
-            font-size: 12px;
+            font-size: 11px;
             font-weight: 600;
             text-anchor: middle;
             dominant-baseline: central;
@@ -258,9 +275,13 @@
 
         .link-label {
             fill: var(--accent-orange);
-            font-size: 12px;
+            font-size: 11px;
             font-weight: bold;
             text-anchor: middle;
+        }
+
+        .code-output-wrapper {
+            position: relative;
         }
 
         .code-output {
@@ -270,10 +291,32 @@
             padding: 12px;
             font-family: monospace;
             word-break: break-all;
-            max-height: 120px;
+            max-height: 100px;
             overflow-y: auto;
             color: var(--accent-orange);
-            font-size: 13px;
+            font-size: 12px;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 6px;
+            right: 6px;
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            color: var(--text-muted);
+            font-size: 10px;
+            padding: 4px 8px;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+
+        .copy-btn:hover {
+            color: #fff;
+            background: var(--accent-blue);
+        }
+
+        .file-input-wrapper {
+            display: none;
         }
     </style>
 </head>
@@ -292,19 +335,24 @@
     </div>
 
     <div class="grid-layout">
-        <!-- Chap tomondagi panel: Kirish va Analitika -->
+        <!-- Chap panel: Kiritish, Boshqarish va Analitika -->
         <div>
             <div class="card">
-                <div class="card-title">1. Matnli Ma'lumotni Kiritish</div>
-                <textarea id="inputText" placeholder="Kodlash uchun matn kiriting...">Xaffman kodlash algoritmi ma'lumotlarni siqishda eng optimal daraxt tuzilmasini barpo etadi.</textarea>
+                <div class="card-title">
+                    <span>1. Ma'lumotlarni Kiritish</span>
+                    <button class="btn-secondary" style="padding: 4px 10px; font-size: 11px;" onclick="document.getElementById('fileInput').click()">📁 Fayldan O'qish</button>
+                    <input type="file" id="fileInput" class="file-input-wrapper" accept=".txt" onchange="handleFileUpload(event)">
+                </div>
+                <textarea id="inputText" placeholder="Kodlash uchun matn kiriting...">Xaffman kodlash algoritmi ma'lumotlarni yo'qotishsiz siqishda eng samarali ierarxik daraxt tuzilmasini qo'llaydi.</textarea>
                 <div class="btn-group">
-                    <button onclick="processHuffman()">Daraxt Yaratish & Siqish</button>
-                    <button class="btn-secondary" onclick="loadSampleText()">Namuna Matn</button>
+                    <button onclick="processHuffman()">🚀 Daraxt Qurish & Siqish</button>
+                    <button class="btn-secondary" onclick="loadSampleText()">✨ Namuna Matn</button>
+                    <button class="btn-warning" onclick="exportReport()">📥 Hisobotni Yuklab Olish</button>
                 </div>
             </div>
 
             <div class="card">
-                <div class="card-title">2. Axborot-Nazariy Analitika</div>
+                <div class="card-title">2. Axborot-Nazariy Analitika & Chastotalar</div>
                 <div class="metrics-grid">
                     <div class="metric-box">
                         <label>Asl O'lcham</label>
@@ -343,21 +391,29 @@
             </div>
 
             <div class="card">
-                <div class="card-title">3. Ikkilik (Binary) Stream & Dekodlash</div>
-                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px;">SIQILGAN BITSTREAM (KODLANGAN):</label>
-                <div class="code-output" id="binaryStream">-</div>
+                <div class="card-title">3. Binar Stream & Dekodlash Tekshiruvi</div>
+                
+                <label style="font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 4px; text-transform: uppercase;">SIQILGAN BITSTREAM (0 va 1 lar):</label>
+                <div class="code-output-wrapper">
+                    <div class="code-output" id="binaryStream">-</div>
+                    <button class="copy-btn" onclick="copyToClipboard('binaryStream')">Nusxa olish</button>
+                </div>
+
                 <br>
-                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px;">QAYTA TIKLANGAN MATN (DEKODLANGAN):</label>
-                <div class="code-output" id="decodedText" style="color: var(--accent-green);">-</div>
+                <label style="font-size: 11px; color: var(--text-muted); display: block; margin-bottom: 4px; text-transform: uppercase;">QAYTA TIKLANGAN MATN (DEKODLANGAN):</label>
+                <div class="code-output-wrapper">
+                    <div class="code-output" id="decodedText" style="color: var(--accent-green);">-</div>
+                    <button class="copy-btn" onclick="copyToClipboard('decodedText')">Nusxa olish</button>
+                </div>
             </div>
         </div>
 
-        <!-- O'ng tomondagi panel: Daraxt Vizualizatsiyasi -->
+        <!-- O'ng panel: Vizualizatsiya -->
         <div>
             <div class="card">
                 <div class="card-title">4. Interaktiv Xaffman Ierarxik Daraxti</div>
-                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
-                    Daraxt tugunlaridagi sonlar belgilarning umumiy chastotasini bildiradi. Yashil tugunlar — haqiqiy harflar (barglar).
+                <p style="font-size: 11px; color: var(--text-muted); margin-bottom: 10px;">
+                    Yashil tugunlar matndagi belgilar (barglar), kulrang tugunlar chastotalar yig'indisini bildiruvchi ota-tugunlar.
                 </p>
                 <div class="tree-container">
                     <svg id="treeSvg"></svg>
@@ -376,20 +432,28 @@
             }
         }
 
+        let globalCurrentData = {
+            text: "",
+            codes: {},
+            freqMap: {},
+            binaryStream: "",
+            decodedText: "",
+            compressedBits: 0,
+            originalBits: 0
+        };
+
         function buildHuffmanTree(text) {
             if (!text) return null;
 
-            // 1. Chastotalarni hisoblash
             const freqMap = {};
             for (let char of text) {
                 freqMap[char] = (freqMap[char] || 0) + 1;
             }
 
-            // 2. Min-Heap (ustuvor navbat) yaratish
             const nodes = Object.keys(freqMap).map(char => new HuffmanNode(char, freqMap[char]));
 
             if (nodes.length === 1) {
-                return new HuffmanNode(null, nodes[0].freq, nodes[0]);
+                return { root: new HuffmanNode(null, nodes[0].freq, nodes[0]), freqMap };
             }
 
             while (nodes.length > 1) {
@@ -449,7 +513,10 @@
 
         function processHuffman() {
             const text = document.getElementById('inputText').value;
-            if (!text) return;
+            if (!text) {
+                alert("Iltimos, kodlash uchun matn kiriting!");
+                return;
+            }
 
             const treeData = buildHuffmanTree(text);
             if (!treeData) return;
@@ -457,7 +524,6 @@
             const { root, freqMap } = treeData;
             const codes = generateCodes(root);
 
-            // Analitika
             const totalChars = text.length;
             const originalBits = totalChars * 8;
             let compressedBits = 0;
@@ -481,6 +547,18 @@
                 `;
             }
 
+            let encodedStream = "";
+            for (let char of text) {
+                encodedStream += codes[char];
+            }
+
+            const decoded = decodeStream(root, encodedStream);
+
+            // Global obyektga saqlash (eksport uchun)
+            globalCurrentData = {
+                text, codes, freqMap, binaryStream: encodedStream, decodedText: decoded, compressedBits, originalBits
+            };
+
             document.getElementById('freqTableBody').innerHTML = tableHtml;
             document.getElementById('originalSize').innerText = originalBits + " bit";
             document.getElementById('compressedSize').innerText = compressedBits + " bit";
@@ -489,18 +567,9 @@
             document.getElementById('compressionRatio').innerText = (ratio > 0 ? ratio : 0) + "%";
             document.getElementById('entropyValue').innerText = calculateEntropy(freqMap, totalChars) + " bit/belgi";
 
-            // Bitstream
-            let encodedStream = "";
-            for (let char of text) {
-                encodedStream += codes[char];
-            }
             document.getElementById('binaryStream').innerText = encodedStream;
-
-            // Dekodlash
-            const decoded = decodeStream(root, encodedStream);
             document.getElementById('decodedText').innerText = decoded;
 
-            // Daraxtni chizish
             renderTree(root);
         }
 
@@ -513,12 +582,11 @@
             const svgWidth = svg.clientWidth || 600;
             const svgHeight = svg.clientHeight || 480;
 
-            // Tugunlar pozitsiyasini hisoblash
             function calculatePositions(node, depth = 0, leftBoundary = 0, rightBoundary = svgWidth) {
                 if (!node) return [];
 
                 const x = (leftBoundary + rightBoundary) / 2;
-                const y = 50 + depth * 65;
+                const y = 45 + depth * 60;
 
                 node.x = x;
                 node.y = y;
@@ -537,7 +605,6 @@
 
             const allNodes = calculatePositions(root);
 
-            // Chiziqlarni (Edges) chizish
             function drawEdges(node) {
                 if (!node) return;
 
@@ -560,7 +627,6 @@
                 line.setAttribute("class", "link");
                 svg.appendChild(line);
 
-                // Bit label (0 yoki 1)
                 const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
                 text.setAttribute("x", (x1 + x2) / 2 + (label === "0" ? -10 : 10));
                 text.setAttribute("y", (y1 + y2) / 2);
@@ -571,7 +637,6 @@
 
             drawEdges(root);
 
-            // Tugunlarni (Nodes) chizish
             allNodes.forEach(({ node, x, y }) => {
                 const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
                 const isLeaf = node.char !== null;
@@ -580,7 +645,7 @@
                 const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
                 circle.setAttribute("cx", x);
                 circle.setAttribute("cy", y);
-                circle.setAttribute("r", isLeaf ? 18 : 16);
+                circle.setAttribute("r", isLeaf ? 17 : 15);
 
                 const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
                 text.setAttribute("x", x);
@@ -596,14 +661,58 @@
         }
 
         function loadSampleText() {
-            document.getElementById('inputText').value = "Muhammadiv Diyorbek va Mirzaliyev Oyatullo - Xaffman Algoritmi Kurs Ishi";
+            document.getElementById('inputText').value = "Muhammadiv Diyorbek va Mirzaliyev Oyatullo — Xaffman Algoritmi Kurs Ishi Loyihasi!";
             processHuffman();
         }
 
-        // Boshlang'ich ishga tushirish
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+            reader.onload = function(e) {
+                document.getElementById('inputText').value = e.target.result;
+                processHuffman();
+            };
+            reader.readAsText(file);
+        }
+
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(() => {
+                alert("Matn buferga nusxalandi!");
+            });
+        }
+
+        function exportReport() {
+            let report = "=== XAFFMAN KODLASH VA MA'LUMOTLARNI SIQISH HISOBOTI ===\n";
+            report += "Bajaruvchilar: Muhammadiv Diyorbek & Mirzaliyev Oyatullo\n\n";
+            report += "ASL MATN:\n" + globalCurrentData.text + "\n\n";
+            report += "STATISTIKA:\n";
+            report += "- Asl hajm: " + globalCurrentData.originalBits + " bit\n";
+            report += "- Siqilgan hajm: " + globalCurrentData.compressedBits + " bit\n";
+            report += "- Siqish koeffitsienti: " + document.getElementById('compressionRatio').innerText + "\n";
+            report += "- Entropiya: " + document.getElementById('entropyValue').innerText + "\n\n";
+            report += "BELGILARNING XAFFMAN KODLARI:\n";
+            
+            for (let char in globalCurrentData.codes) {
+                report += `'${char}': ${globalCurrentData.codes[char]} (Chastota: ${globalCurrentData.freqMap[char]})\n`;
+            }
+
+            report += "\nKODLANGAN BITSTREAM:\n" + globalCurrentData.binaryStream + "\n";
+
+            const blob = new Blob([report], { type: 'text/plain;charset=utf-8' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'Xaffman_Hisobot_Diyorbek_Oyatullo.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
         window.onload = function() {
             processHuffman();
         };
     </script>
 </body>
-</html>s
+</html>
