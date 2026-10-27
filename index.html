@@ -3,459 +3,964 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xaffman Kodlash va Siqish Tizimi - Kurs Ishi</title>
-    <!-- Google Fonts va FontAwesome -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <title>CyberGuard Pro - Parollar Generatori va Tahlil Platformasi</title>
+    <!-- Google Fonts va FontAwesome Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     
     <style>
         :root {
-            --bg-color: #0b0f19;
-            --card-bg: #111827;
-            --primary: #6366f1;
-            --primary-hover: #4f46e5;
-            --accent: #10b981;
-            --text-main: #f3f4f6;
-            --text-muted: #9ca3af;
-            --border: #374151;
-            --danger: #ef4444;
+            --bg-deep: #090d16;
+            --bg-card: rgba(19, 27, 46, 0.75);
+            --bg-input: #0b1120;
+            --border: rgba(255, 255, 255, 0.08);
+            --border-focus: #3b82f6;
+            
+            --primary: #38bdf8;
+            --primary-glow: rgba(56, 189, 248, 0.25);
+            --accent: #6366f1;
+            
+            --text-main: #f1f5f9;
+            --text-muted: #64748b;
+            --text-sub: #94a3b8;
+
+            --danger: #f43f5e;
+            --warning: #f59e0b;
+            --good: #10b981;
+            --strong: #06b6d4;
+            --bulletproof: #8b5cf6;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Inter', sans-serif;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            -webkit-font-smoothing: antialiased;
         }
 
         body {
-            background-color: var(--bg-color);
+            background-color: var(--bg-deep);
+            background-image: 
+                radial-gradient(at 10% 10%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
+                radial-gradient(at 90% 90%, rgba(56, 189, 248, 0.1) 0px, transparent 50%);
+            background-attachment: fixed;
             color: var(--text-main);
             min-height: 100vh;
-            padding: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 24px 16px;
         }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
+        .mono {
+            font-family: 'JetBrains Mono', monospace;
         }
 
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background: var(--card-bg);
-            border: 1px solid var(--border);
-            border-radius: 16px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
-        }
-
-        header h1 {
-            font-size: 2rem;
-            color: #fff;
-            margin-bottom: 8px;
-            background: linear-gradient(90deg, #818cf8, #34d399);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        header p {
-            color: var(--text-muted);
-            font-size: 0.95rem;
-        }
-
-        .student-badge {
-            display: inline-block;
-            margin-top: 12px;
-            padding: 6px 16px;
-            background: rgba(99, 102, 241, 0.15);
-            border: 1px solid var(--primary);
-            border-radius: 20px;
-            font-size: 0.85rem;
-            font-weight: 600;
-            color: #818cf8;
-        }
-
-        .grid-layout {
+        .app-container {
+            width: 100%;
+            max-width: 1100px;
             display: grid;
             grid-template-columns: 1fr;
-            gap: 20px;
+            gap: 24px;
         }
 
-        @media (min-width: 992px) {
-            .grid-layout {
-                grid-template-columns: 1fr 1fr;
+        @media (min-width: 900px) {
+            .app-container {
+                grid-template-columns: 1.1fr 0.9fr;
+            }
+            .header-block {
+                grid-column: 1 / -1;
             }
         }
 
+        /* Card Styles */
         .card {
-            background: var(--card-bg);
+            background: var(--bg-card);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
             border: 1px solid var(--border);
-            border-radius: 16px;
-            padding: 24px;
-            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
-            display: flex;
-            flex-direction: column;
-            gap: 16px;
+            border-radius: 20px;
+            padding: 28px;
+            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
+        }
+
+        .header-block {
+            text-align: center;
+            padding: 10px 0 0;
+        }
+
+        .header-block .badge {
+            background: rgba(56, 189, 248, 0.1);
+            color: var(--primary);
+            border: 1px solid rgba(56, 189, 248, 0.2);
+            padding: 6px 14px;
+            border-radius: 30px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 12px;
+        }
+
+        .header-block h1 {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.02em;
+            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 6px;
+        }
+
+        .header-block p {
+            color: var(--text-sub);
+            font-size: 0.95rem;
         }
 
         .section-title {
             font-size: 1.15rem;
-            font-weight: 600;
+            font-weight: 700;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            color: #fff;
+        }
+
+        .section-title span {
             display: flex;
             align-items: center;
             gap: 10px;
-            color: #818cf8;
-            border-bottom: 1px solid var(--border);
-            padding-bottom: 10px;
         }
 
-        textarea {
+        .section-title i {
+            color: var(--primary);
+        }
+
+        /* Input Controls */
+        .input-wrapper {
+            position: relative;
+            margin-bottom: 16px;
+        }
+
+        .input-wrapper input {
             width: 100%;
-            height: 130px;
-            background: #030712;
+            padding: 16px 50px 16px 16px;
+            background: var(--bg-input);
             border: 1px solid var(--border);
-            border-radius: 10px;
+            border-radius: 12px;
             color: #fff;
-            padding: 14px;
-            font-size: 0.95rem;
-            resize: vertical;
+            font-size: 1.1rem;
             outline: none;
-            transition: border-color 0.3s;
+            transition: all 0.25s ease;
         }
 
-        textarea:focus {
-            border-color: var(--primary);
+        .input-wrapper input:focus {
+            border-color: var(--border-focus);
+            box-shadow: 0 0 0 4px var(--primary-glow);
         }
 
-        .btn-group {
-            display: flex;
-            gap: 10px;
-        }
-
-        .btn {
-            flex: 1;
-            padding: 12px;
-            background: var(--primary);
-            color: #fff;
+        .input-wrapper .action-btn {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            background: transparent;
             border: none;
-            border-radius: 10px;
-            font-weight: 600;
+            color: var(--text-muted);
             cursor: pointer;
-            transition: background 0.2s, transform 0.1s;
+            padding: 8px;
+            font-size: 1.1rem;
+            border-radius: 8px;
+            transition: color 0.2s;
+        }
+
+        .input-wrapper .action-btn:hover {
+            color: #fff;
+        }
+
+        /* Progress Bar */
+        .meter-container {
+            margin-bottom: 20px;
+        }
+
+        .meter-bg {
+            height: 10px;
+            background: var(--bg-input);
+            border-radius: 6px;
+            overflow: hidden;
+            border: 1px solid var(--border);
+            margin-bottom: 10px;
+        }
+
+        .meter-fill {
+            height: 100%;
+            width: 0%;
+            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s;
+        }
+
+        .meter-status {
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .status-tag {
+            font-size: 0.85rem;
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+            padding: 4px 10px;
+            border-radius: 6px;
+        }
+
+        .entropy-tag {
+            font-size: 0.85rem;
+            color: var(--text-sub);
+        }
+
+        /* Pattern Warnings */
+        .warnings-box {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+
+        .warning-chip {
+            font-size: 0.75rem;
+            padding: 4px 10px;
+            border-radius: 6px;
+            background: rgba(244, 63, 94, 0.1);
+            color: var(--danger);
+            border: 1px solid rgba(244, 63, 94, 0.2);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            padding: 14px;
+            border-radius: 10px;
+        }
+
+        .stat-card .lbl {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+            text-transform: uppercase;
+            letter-spacing: 0.03em;
+        }
+
+        .stat-card .val {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+            word-break: break-all;
+        }
+
+        /* Crack Time Breakdown */
+        .crack-times {
+            background: var(--bg-input);
+            border: 1px solid var(--border);
+            border-radius: 12px;
+            padding: 16px;
+        }
+
+        .crack-times-header {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            margin-bottom: 12px;
+            font-weight: 600;
+        }
+
+        .crack-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
+            font-size: 0.88rem;
+        }
+
+        .crack-row:last-child {
+            border-bottom: none;
+        }
+
+        .crack-row .hardware {
+            color: var(--text-sub);
+            display: flex;
             align-items: center;
             gap: 8px;
         }
 
-        .btn:hover {
-            background: var(--primary-hover);
+        .crack-row .time {
+            font-weight: 600;
+            color: var(--primary);
         }
 
-        .btn:active {
-            transform: scale(0.98);
-        }
-
-        .btn-success {
-            background: var(--accent);
-        }
-        .btn-success:hover {
-            background: #059669;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 10px;
-        }
-
-        .stat-card {
-            background: #030712;
-            padding: 12px;
+        /* Generator Tabs & Controls */
+        .tab-group {
+            display: flex;
+            background: var(--bg-input);
+            padding: 4px;
             border-radius: 10px;
+            margin-bottom: 20px;
             border: 1px solid var(--border);
-            text-align: center;
         }
 
-        .stat-card .label {
-            font-size: 0.75rem;
-            color: var(--text-muted);
-            margin-bottom: 4px;
+        .tab-btn {
+            flex: 1;
+            padding: 8px;
+            background: transparent;
+            border: none;
+            color: var(--text-sub);
+            font-weight: 600;
+            font-size: 0.85rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: all 0.2s;
         }
 
-        .stat-card .value {
-            font-size: 1.1rem;
+        .tab-btn.active {
+            background: var(--primary);
+            color: #000;
+        }
+
+        .control-group {
+            margin-bottom: 20px;
+        }
+
+        .control-group label {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            color: var(--text-sub);
+        }
+
+        .control-group label span.val {
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        input[type="range"] {
+            width: 100%;
+            height: 6px;
+            background: var(--bg-input);
+            border-radius: 3px;
+            outline: none;
+            accent-color: var(--primary);
+        }
+
+        .checkbox-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            margin-bottom: 24px;
+        }
+
+        .check-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.88rem;
+            color: var(--text-sub);
+            cursor: pointer;
+            user-select: none;
+        }
+
+        .check-item input[type="checkbox"] {
+            width: 18px;
+            height: 18px;
+            accent-color: var(--primary);
+            cursor: pointer;
+        }
+
+        /* Action Buttons */
+        .btn-primary {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2);
+            transition: transform 0.15s, box-shadow 0.15s;
+        }
+
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.35);
+        }
+
+        .btn-primary:active {
+            transform: translateY(0);
+        }
+
+        /* Mathematical Explanations */
+        .math-card {
+            grid-column: 1 / -1;
+            background: rgba(11, 17, 32, 0.8);
+            border: 1px dashed var(--border);
+            border-radius: 16px;
+            padding: 20px;
+        }
+
+        .math-title {
+            font-size: 0.9rem;
             font-weight: 700;
             color: #fff;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
-        .code-output {
-            background: #030712;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            padding: 14px;
-            font-family: 'Fira Code', monospace;
-            font-size: 0.85rem;
-            color: #34d399;
-            max-height: 120px;
-            overflow-y: auto;
-            word-break: break-all;
+        .math-grid {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 12px;
+            font-size: 0.82rem;
+            color: var(--text-sub);
+            line-height: 1.6;
         }
 
-        /* Jadval uslubi */
-        .table-container {
-            max-height: 250px;
-            overflow-y: auto;
-            border: 1px solid var(--border);
-            border-radius: 10px;
+        @media (min-width: 600px) {
+            .math-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            font-size: 0.9rem;
-            text-align: left;
-        }
-
-        th, td {
-            padding: 10px 14px;
-            border-bottom: 1px solid var(--border);
-        }
-
-        th {
-            background: #030712;
-            color: var(--text-muted);
-            position: sticky;
-            top: 0;
-            z-index: 1;
-        }
-
-        tr:hover {
+        .math-item {
             background: rgba(255, 255, 255, 0.02);
+            padding: 12px;
+            border-radius: 8px;
+            border: 1px solid rgba(255, 255, 255, 0.03);
         }
 
-        .full-width {
-            grid-column: 1 / -1;
+        .math-item code {
+            color: var(--primary);
+            font-size: 0.85rem;
+            display: block;
+            margin-top: 4px;
+        }
+
+        /* Toast Alert */
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            background: var(--good);
+            color: #000;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.85rem;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transform: translateY(100px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .toast.show {
+            transform: translateY(0);
+            opacity: 1;
         }
     </style>
 </head>
 <body>
 
-<div class="container">
-    <header>
-        <h1><i class="fa-solid fa-tree"><b></b>fa-network-wired</i> Ma'lumotlarni Siqish: Xaffman Daraxti</h1>
-        <p>Optimal kodlash nazariyasi va ierarxik ma'lumotlar tuzilmasi asosida matnni siqish va tiklash tizimi</p>
-        <div class="student-badge">
-            <i class="fa-solid fa-graduation-cap"></i> Talaba: Muhammadiv Diyorbek Mirzaliyev Oyatullo
-        </div>
-    </header>
+<div class="app-container">
+    
+    <!-- HEADER -->
+    <div class="header-block">
+        <div class="badge"><i class="fa-solid fa-shield-cat"></i> Kibervaffsizlik Loyihasi</div>
+        <h1>Parollar Tahlili va Generatsiyasi</h1>
+        <p>Ehtimollar nazariyasi hamda Shannon entropiyasi formulasi asosida xavfsizlikni baholash</p>
+    </div>
 
-    <div class="grid-layout">
-        <!-- KIRISH MA'LUMOTI -->
-        <div class="card">
-            <div class="section-title">
-                <i class="fa-solid fa-pen-to-square"></i> Matnni Kiriting (Asl Ma'lumot)
+    <!-- TAHLIL QISMI -->
+    <div class="card">
+        <div class="section-title">
+            <span><i class="fa-solid fa-chart-line"></i> Parol Audit Tizimi</span>
+        </div>
+
+        <div class="input-wrapper">
+            <input type="password" id="inputPassword" class="mono" placeholder="Parolni kiriting yoki tekshiring..." autocomplete="off">
+            <button class="action-btn" id="btnToggleVis"><i class="fa-regular fa-eye"></i></button>
+            <button class="action-btn" id="btnCopy" style="right: 45px;"><i class="fa-regular fa-copy"></i></button>
+        </div>
+
+        <div class="meter-container">
+            <div class="meter-bg">
+                <div class="meter-fill" id="meterFill"></div>
             </div>
-            <textarea id="inputText" placeholder="Shu yerga siqish uchun istalgan matn yozing...">Salom dunyo! Bu Xaffman kodlash orqali ma'lumotlarni optimal siqish va dekodlash bo'yicha maxsus kurs ishi dasturi.</textarea>
+            <div class="meter-status">
+                <span class="status-tag" id="statusTag">Kutilmoqda</span>
+                <span class="entropy-tag mono" id="entropyVal">0.0 bit</span>
+            </div>
+        </div>
+
+        <!-- Pattern Ogohlantirishlari -->
+        <div class="warnings-box" id="warningsBox"></div>
+
+        <!-- Statistika -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="lbl">Alifbo o'lchami (N)</div>
+                <div class="val mono" id="statN">0 belgi</div>
+            </div>
+            <div class="stat-card">
+                <div class="lbl">Kombinatsiyalar (Nᴸ)</div>
+                <div class="val mono" id="statCombinations">0</div>
+            </div>
+        </div>
+
+        <!-- Buzish Vaqtlari -->
+        <div class="crack-times">
+            <div class="crack-times-header">Buzib kirish taxminiy vaqti (Brute-Force)</div>
             
-            <div class="btn-group">
-                <button class="btn" id="processBtn">
-                    <i class="fa-solid fa-cogs"></i> Xaffman Daraxtini Qurish & Siqish
-                </button>
+            <div class="crack-row">
+                <span class="hardware"><i class="fa-solid fa-globe"></i> Onlayn Hujum (100 req/s)</span>
+                <span class="time mono" id="timeOnline">0s</span>
             </div>
-        </div>
-
-        <!-- STATISTIKA VA NATIJA -->
-        <div class="card">
-            <div class="section-title">
-                <i class="fa-solid fa-chart-pie"></i> Siqilish Samaradorligi Tahlili
+            <div class="crack-row">
+                <span class="hardware"><i class="fa-solid fa-laptop"></i> Oddiy Kompyuter (1M/s)</span>
+                <span class="time mono" id="timePC">0s</span>
             </div>
-            
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="label">Asl hajm (ASCII)</div>
-                    <div class="value" id="origSize">0 bit</div>
-                </div>
-                <div class="stat-card">
-                    <div class="label">Siqilgan hajm</div>
-                    <div class="value" id="compSize" style="color: #34d399;">0 bit</div>
-                </div>
-                <div class="stat-card">
-                    <div class="label">Tejamkorlik</div>
-                    <div class="value" id="savingRate" style="color: #818cf8;">0%</div>
-                </div>
+            <div class="crack-row">
+                <span class="hardware"><i class="fa-solid fa-microchip"></i> GPU Rig (100B/s)</span>
+                <span class="time mono" id="timeGPU">0s</span>
             </div>
-
-            <div>
-                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">Binarni Kodlangan Ko'rinishi:</div>
-                <div class="code-output" id="encodedOutput">Kutilmoqda...</div>
+            <div class="crack-row">
+                <span class="hardware"><i class="fa-solid fa-server"></i> Superkompyuter (100T/s)</span>
+                <span class="time mono" id="timeSuper">0s</span>
             </div>
-        </div>
-
-        <!-- SIMVOLLAR VA XAFFMAN KODLARI JADVALI -->
-        <div class="card">
-            <div class="section-title">
-                <i class="fa-solid fa-table-list"></i> Chastotalar va Xaffman Kodlari Jadvali
-            </div>
-            <div class="table-container">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Simvol</th>
-                            <th>Chastota (Soni)</th>
-                            <th>Xaffman Kodi</th>
-                            <th>Bit uzunligi</th>
-                        </tr>
-                    </thead>
-                    <tbody id="frequencyTableBody">
-                        <!-- Dinamik to'ldiriladi -->
-                    </tbody>
-                </table>
-            </div>
-        </div>
-
-        <!-- DEKODLASH (TIKLASH) QISMI -->
-        <div class="card">
-            <div class="section-title">
-                <i class="fa-solid fa-rotate-left"></i> Dekodlash (Ma'lumotni Tiklash)
-            </div>
-            <p style="font-size: 0.85rem; color: var(--text-muted);">Siqilgan binar kod orqali asl matnni yo'qotishlarsiz qayta tiklash:</p>
-            <div class="code-output" id="decodedOutput" style="color: #f3f4f6;">Kutilmoqda...</div>
-            <button class="btn btn-success" id="decodeBtn">
-                <i class="fa-solid fa-shield-check"></i> Matnni To'liq Tekshirish va Tiklash
-            </button>
         </div>
     </div>
+
+    <!-- GENERATOR QISMI -->
+    <div class="card">
+        <div class="section-title">
+            <span><i class="fa-solid fa-wand-magic-sparkles"></i> Aqlli Generator</span>
+        </div>
+
+        <div class="tab-group">
+            <button class="tab-btn active" id="tabRandom">Tasodifiy (Random)</button>
+            <button class="tab-btn" id="tabDiceware">Diceware (Lug'atli)</button>
+        </div>
+
+        <!-- Random Parametrlari -->
+        <div id="panelRandom">
+            <div class="control-group">
+                <label>
+                    <span>Parol uzunligi:</span>
+                    <span class="val mono" id="lblLength">16</span>
+                </label>
+                <input type="range" id="rangeLength" min="6" max="64" value="16">
+            </div>
+
+            <div class="checkbox-grid">
+                <label class="check-item">
+                    <input type="checkbox" id="chkUpper" checked> Katta (A-Z)
+                </label>
+                <label class="check-item">
+                    <input type="checkbox" id="chkLower" checked> Kichik (a-z)
+                </label>
+                <label class="check-item">
+                    <input type="checkbox" id="chkNum" checked> Raqamlar (0-9)
+                </label>
+                <label class="check-item">
+                    <input type="checkbox" id="chkSym" checked> Belgilar (!@#$)
+                </label>
+                <label class="check-item" style="grid-column: 1 / -1;">
+                    <input type="checkbox" id="chkAmbiguous"> Chalg'ituvchi belgilar joylanmasin (l, 1, O, 0)
+                </label>
+            </div>
+        </div>
+
+        <!-- Diceware Parametrlari -->
+        <div id="panelDiceware" style="display: none;">
+            <div class="control-group">
+                <label>
+                    <span>So'zlar soni:</span>
+                    <span class="val mono" id="lblWords">4</span>
+                </label>
+                <input type="range" id="rangeWords" min="3" max="8" value="4">
+            </div>
+            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px;">
+                Diceware algoritmi osongina eslab qolinadigan va ayni paytda yuqori darajadagi xavfsizlikni ta'minlaydigan so'zlar birikmasini yaratadi.
+            </p>
+        </div>
+
+        <button class="btn-primary" id="btnGenerate">
+            <i class="fa-solid fa-arrows-rotate"></i> Yangi Parol Yaratish
+        </button>
+    </div>
+
+    <!-- MATEMATIK ASOSLAR (Loyiha Himoyasi Uchun) -->
+    <div class="math-card">
+        <div class="math-title"><i class="fa-solid fa-square-root-variable"></i> Loyihaning Matematik Nazariyasi</div>
+        <div class="math-grid">
+            <div class="math-item">
+                <strong>Alifbo Kengligi (N)</strong>
+                Parolda ishlatilgan belgilar turlariga qarab tanlanadi: Kichik (26), Katta (26), Raqam (10), Maxsus (32).
+                <code>N = N₁ + N₂ + ...</code>
+            </div>
+            <div class="math-item">
+                <strong>Shannon Entropiyasi (E)</strong>
+                Parol tarkibidagi axborot zichligi va tartibsizlik darajasini bitlarda o'lchovchi formula.
+                <code>E = L × log₂(N)</code>
+            </div>
+            <div class="math-item">
+                <strong>Buzish Ehtimolligi (T)</strong>
+                Brute-Force hujumi orqali to'liq qidirib chiqish uchun ketadigan o'rtacha vaqt.
+                <code>T = (Nᴸ / 2) / Speed</code>
+            </div>
+        </div>
+    </div>
+
 </div>
 
+<!-- Bildirishnoma (Toast) -->
+<div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i> Nusxalandi!</div>
+
 <script>
-    // Xaffman Tugun (Node) klassi
-    class HuffmanNode {
-        constructor(char, freq, left = null, right = null) {
-            this.char = char;
-            this.freq = freq;
-            this.left = left;
-            this.right = right;
+    // DICELI_DICTIONARY (Kichik namuna lug'at iboralar uchun)
+    const DICE_WORDS = [
+        "quyosh", "shamol", "daryo", "burgut", "qalqon", "qulf", "yulduz", "buloq", 
+        "alanga", "tuman", "o'rmon", "sayyora", "ummon", "qoya", "poydevor", "mantiq",
+        "vektor", "algoritm", "matritsa", "kripto", "parol", "tizim", "kiber", "harakat"
+    ];
+
+    // Elementlar
+    const inputPassword = document.getElementById('inputPassword');
+    const btnToggleVis = document.getElementById('btnToggleVis');
+    const btnCopy = document.getElementById('btnCopy');
+    const meterFill = document.getElementById('meterFill');
+    const statusTag = document.getElementById('statusTag');
+    const entropyVal = document.getElementById('entropyVal');
+    const warningsBox = document.getElementById('warningsBox');
+    
+    const statN = document.getElementById('statN');
+    const statCombinations = document.getElementById('statCombinations');
+    const timeOnline = document.getElementById('timeOnline');
+    const timePC = document.getElementById('timePC');
+    const timeGPU = document.getElementById('timeGPU');
+    const timeSuper = document.getElementById('timeSuper');
+
+    const tabRandom = document.getElementById('tabRandom');
+    const tabDiceware = document.getElementById('tabDiceware');
+    const panelRandom = document.getElementById('panelRandom');
+    const panelDiceware = document.getElementById('panelDiceware');
+    
+    const rangeLength = document.getElementById('rangeLength');
+    const lblLength = document.getElementById('lblLength');
+    const rangeWords = document.getElementById('rangeWords');
+    const lblWords = document.getElementById('lblWords');
+
+    const chkUpper = document.getElementById('chkUpper');
+    const chkLower = document.getElementById('chkLower');
+    const chkNum = document.getElementById('chkNum');
+    const chkSym = document.getElementById('chkSym');
+    const chkAmbiguous = document.getElementById('chkAmbiguous');
+    const btnGenerate = document.getElementById('btnGenerate');
+    const toast = document.getElementById('toast');
+
+    let currentMode = 'random'; // 'random' yoki 'diceware'
+
+    // Belgilar Toplami
+    const CHAR_SETS = {
+        upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
+        lower: 'abcdefghijklmnopqrstuvwxyz',
+        num: '0123456789',
+        sym: '!@#$%^&*()_+-=[]{}|;:,.<>?'
+    };
+    const AMBIGUOUS = /[l1O0I]/g;
+
+    // PATTERN TEKSHIRISH
+    function detectPatterns(pwd) {
+        const warnings = [];
+        if (!pwd) return warnings;
+
+        // Qaytariluvchi belgilar (aaa, 111)
+        if (/(.)\1\1/.test(pwd)) {
+            warnings.push("Ketma-ket 3+ bir xil belgi");
         }
+        // Ketma-ket raqamlar yoki harflar (1234, abcd)
+        if (/(012|123|234|345|456|567|678|789|abc|bcd|cde|def)/i.test(pwd)) {
+            warnings.push("Oddiy ketma-ketlik mavjud (123/abc)");
+        }
+        // Klaviatura ketma-ketligi
+        if (/(qwerty|asdf|zxcv)/i.test(pwd)) {
+            warnings.push("Klaviatura tartibi (qwerty)");
+        }
+        // L33tspeak (P@ssw0rd)
+        if (/[a-z]+[@013$][a-z]+/i.test(pwd)) {
+            warnings.push("Oson taxmin qilinadigan almashtirishlar");
+        }
+
+        return warnings;
     }
 
-    function buildHuffmanTree(text) {
-        if (!text) return null;
-
-        // 1. Chastotalarni hisoblash
-        const frequencies = {};
-        for (let char of text) {
-            frequencies[char] = (frequencies[char] || 0) + 1;
-        }
-
-        // 2. Ustuvor navbat (Priority Queue) yaratish
-        let nodes = Object.keys(frequencies).map(char => new HuffmanNode(char, frequencies[char]));
-
-        if (nodes.length === 1) {
-            // Agar matnda faqat 1 xil simvol bo'lsa
-            let parent = new HuffmanNode(null, nodes[0].freq, nodes[0], null);
-            return { root: parent, frequencies };
-        }
-
-        while (nodes.length > 1) {
-            nodes.sort((a, b) => a.freq - b.freq);
-            let left = nodes.shift();
-            let right = nodes.shift();
-
-            let parent = new HuffmanNode(null, left.freq + right.freq, left, right);
-            nodes.push(parent);
-        }
-
-        return { root: nodes[0], frequencies };
-    }
-
-    // Kodlarni rekursiv hosil qilish
-    function generateCodes(node, currentCode = '', codes = {}) {
-        if (!node) return;
-
-        if (node.char !== null) {
-            codes[node.char] = currentCode || '0'; // Agar bitta simvol bo'lsa '0' beriladi
+    // TAHLIL ENGINE
+    function analyze(pwd) {
+        if (!pwd) {
+            resetStats();
             return;
         }
 
-        generateCodes(node.left, currentCode + '0', codes);
-        generateCodes(node.right, currentCode + '1', codes);
+        let N = 0;
+        let hasLower = /[a-z]/.test(pwd);
+        let hasUpper = /[A-Z]/.test(pwd);
+        let hasNum = /[0-9]/.test(pwd);
+        let hasSym = /[^a-zA-Z0-9]/.test(pwd);
 
-        return codes;
-    }
+        if (hasLower) N += 26;
+        if (hasUpper) N += 26;
+        if (hasNum) N += 10;
+        if (hasSym) N += 32;
 
-    // Dekodlash funksiyasi
-    function decodeHuffman(root, encodedStr) {
-        let decodedText = '';
-        let currentNode = root;
-
-        for (let bit of encodedStr) {
-            if (bit === '0') {
-                currentNode = currentNode.left;
-            } else {
-                currentNode = currentNode.right;
-            }
-
-            if (currentNode.char !== null) {
-                decodedText += currentNode.char;
-                currentNode = root;
-            }
-        }
-        return decodedText;
-    }
-
-    // Asosiy ishga tushirish funksiyasi
-    function runHuffman() {
-        const text = document.getElementById('inputText').value;
-        if (!text) {
-            alert("Iltimos, matn kiriting!");
-            return;
-        }
-
-        const { root, frequencies } = buildHuffmanTree(text);
-        const huffmanCodes = generateCodes(root);
-
-        // Matnni kodlash
-        let encodedStr = '';
-        for (let char of text) {
-            encodedStr += huffmanCodes[char];
-        }
-
-        // Hajmlarni hisoblash (Asl matn: har bir belgi 8 bit ASCII deb olinadi)
-        const origBits = text.length * 8;
-        const compBits = encodedStr.length;
-        const saving = ((1 - (compBits / origBits)) * 100).toFixed(1);
-
-        // Natijalarni UI ga chiqarish
-        document.getElementById('origSize').innerText = `${origBits} bit (${text.length} bayt)`;
-        document.getElementById('compSize').innerText = `${compBits} bit`;
-        document.getElementById('savingRate').innerText = `${saving > 0 ? saving : 0}% tejamkorlik`;
-        document.getElementById('encodedOutput').innerText = encodedStr;
-
-        // Jadvalni to'ldirish
-        const tbody = document.getElementById('frequencyTableBody');
-        tbody.innerHTML = '';
+        const L = pwd.length;
         
-        // Chastota bo'yicha kamayish tartibida saralash
-        const sortedChars = Object.keys(frequencies).sort((a, b) => frequencies[b] - frequencies[a]);
+        // Entropiya: E = L * log2(N)
+        let entropy = N > 0 ? L * Math.log2(N) : 0;
 
-        for (let char of sortedChars) {
-            const displayChar = char === ' ' ? '[BO‘SHLIQ (Space)]' : (char === '\n' ? '[YANGI QATOR]' : char);
-            const row = `<tr>
-                <td><b>${displayChar}</b></td>
-                <td>${frequencies[char]}</td>
-                <td><code style="color: #34d399;">${huffmanCodes[char]}</code></td>
-                <td>${huffmanCodes[char].length} bit</td>
-            </tr>`;
-            tbody.innerHTML += row;
+        // Pattern bo'lsa entropiyadan ozgina jarima ayiramiz
+        const warnings = detectPatterns(pwd);
+        if (warnings.length > 0) {
+            entropy = Math.max(0, entropy - (warnings.length * 8));
         }
 
-        // Global saqlash dekodlash uchun
-        window.huffmanRoot = root;
-        window.encodedData = encodedStr;
-        document.getElementById('decodedOutput').innerText = "Tayyor. Pastdagi tugmani bosing.";
+        // Kombinatsiyalar N^L
+        const combinations = N > 0 ? Math.pow(N, L) : 0;
+
+        // UI Yangilash
+        renderResults(N, combinations, entropy, warnings);
     }
 
-    // Dekoderni ishlatish
-    document.getElementById('decodeBtn').
+    function renderResults(N, combinations, entropy, warnings) {
+        statN.innerText = `${N} belgi`;
+        
+        if (combinations > 1e15) {
+            statCombinations.innerText = combinations.toExponential(2);
+        } else {
+            statCombinations.innerText = Math.round(combinations).toLocaleString();
+        }
+
+        entropyVal.innerText = `${entropy.toFixed(1)} bit`;
+
+        // Pattern ogohlantirishlari
+        warningsBox.innerHTML = '';
+        warnings.forEach(w => {
+            const chip = document.createElement('div');
+            chip.className = 'warning-chip';
+            chip.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> ${w}`;
+            warningsBox.appendChild(chip);
+        });
+
+        // Vaqtlarni hisoblash
+        // Tezliklar: Online=100/s, PC=1M/s, GPU=100B/s, Super=100T/s
+        const totalAttempts = combinations / 2; // O'rtacha yarmi
+        timeOnline.innerText = formatTime(totalAttempts / 100);
+        timePC.innerText = formatTime(totalAttempts / 1e6);
+        timeGPU.innerText = formatTime(totalAttempts / 1e11);
+        timeSuper.innerText = formatTime(totalAttempts / 1e14);
+
+        // Darajalar
+        let level = { percent: 0, color: '#64748b', text: 'Kutilmoqda' };
+
+        if (entropy > 0 && entropy < 28) {
+            level = { percent: 20, color: 'var(--danger)', text: 'O`ta Zaif' };
+        } else if (entropy >= 28 && entropy < 40) {
+            level = { percent: 40, color: 'var(--warning)', text: 'Zaif' };
+        } else if (entropy >= 40 && entropy < 60) {
+            level = { percent: 60, color: '#eab308', text: 'O`rtacha' };
+        } else if (entropy >= 60 && entropy < 90) {
+            level = { percent: 80, color: 'var(--good)', text: 'Mustahkam' };
+        } else if (entropy >= 90) {
+            level = { percent: 100, color: 'var(--bulletproof)', text: 'Buzilmas' };
+        }
+
+        meterFill.style.width = `${level.percent}%`;
+        meterFill.style.backgroundColor = level.color;
+        statusTag.style.backgroundColor = `${level.color}22`;
+        statusTag.style.color = level.color;
+        statusTag.innerText = level.text;
+    }
+
+    function formatTime(seconds) {
+        if (!isFinite(seconds) || seconds < 0) return "0s";
+        if (seconds < 1) return "< 1 soniya";
+        if (seconds < 60) return `${Math.floor(seconds)} soniya`;
+        
+        const min = seconds / 60;
+        if (min < 60) return `${Math.floor(min)} daqiqa`;
+        
+        const hrs = min / 60;
+        if (hrs < 24) return `${Math.floor(hrs)} soat`;
+        
+        const days = hrs / 24;
+        if (days < 365) return `${Math.floor(days)} kun`;
+        
+        const yrs = days / 365;
+        if (yrs < 1000) return `${Math.floor(yrs)} yil`;
+        if (yrs < 1e6) return `${(yrs / 1000).toFixed(1)} ming yil`;
+        if (yrs < 1e9) return `${(yrs / 1e6).toFixed(1)} mln yil`;
+        return `${(yrs / 1e9).toFixed(1)} mldr yil`;
+    }
+
+    function resetStats() {
+        meterFill.style.width = '0%';
+        statusTag.innerText = 'Kutilmoqda';
+        statusTag.style.backgroundColor = 'transparent';
+        statusTag.style.color = 'var(--text-muted)';
+        entropyVal.innerText = '0.0 bit';
+        statN.innerText = '0 belgi';
+        statCombinations.innerText = '0';
+        warningsBox.innerHTML = '';
+        timeOnline.innerText = '0s';
+        timePC.innerText = '0s';
+        timeGPU.innerText = '0s';
+        timeSuper.innerText = '0s';
+    }
+
+    // GENERATOR
+    function generate() {
+        let result = '';
+
+        if (currentMode === 'random') {
+            let pool = '';
+            if (chkUpper.checked) pool += CHAR_SETS.upper;
+            if (chkLower.checked) pool += CHAR_SETS.lower;
+            if (chkNum.checked) pool += CHAR_SETS.num;
+            if (chkSym.checked) pool += CHAR_SETS.sym;
+
+            if (chkAmbiguous.checked) {
+                pool = pool.replace(AMBIGUOUS, '');
+            }
+
+            if (!pool) {
+                showToast("Kamida bitta belgi turini tanlang!", true);
+                return;
+            }
+
+            const len = parseInt(rangeLength.value);
+            const array = new Uint32Array(len);
+            window.crypto.getRandomValues(array);
+
+            for (let i = 0; i < len; i++) {
+                result += pool[array[i] % pool.length];
+            }
+        } else {
+            // Diceware
+            const wordCount = parseInt(rangeWords.value);
+            const array = new Uint32Array(wordCount);
+            window.crypto.getRandomValues(array);
+
+            const words = [];
+            for (let i = 0; i < wordCount; i++) {
+                words.push(DICE_WORDS[array[i] % DICE_WORDS.length]);
+            }
+            // Tasodifiy ajratuvchi va raqam
+            const num = (array[0] % 90) + 10;
+            result = words.join('-') + '-' + num;
+        }
+
+        inputPassword.value = result;
+        analyze(result);
+    }
+
+    function showToast(msg = "Nusxalandi!", isError = false) {
+        toast.style.background = isError ? 'var(--danger)' : 'var(--good)';
+        toast.style.color = isError ? '#fff' : '#000';
+        toast.innerHTML = isError 
+            ? `<i class="fa-solid fa-circle-exclamation"></i> ${msg}`
+            : `<i class="fa-solid fa-circle-check"></i> ${msg}`;
+        toast.classList.add('show');
+        setTimeout(() => toast.classList.remove('show'), 2000);
+    }
+
+    // EVENT LISTENERS
+    inputPassword.addEventListener('input', (e) => analyze(e.target.value));
+
+    btnToggleVis.addEventListener('click', () => {
+        const type = inputPassword.type === 'password' ? 'text' : 'password';
+        inputPassword.type = type;
+        btnToggleVis.innerHTML = type === 'password' 
+            ? '<i class="fa-regular fa-eye"></i>' 
+            : '<i class="fa-regular fa-eye-slash"></i>';
+    });
+
+    btnCopy.addEventListener('click', () => {
+        if (!inputPassword.value) return;
+        navigator.clipboard.writeText(inputPassword.value);
+        showToast("Parol clipboard'ga nusxalandi!");
+    });
+
+    // Tab almashishi
+    tabRandom.addEventListener('click', () => {
+        currentMode = 'random';
+        tabRandom.classList.add('active');
+        tabDiceware.classList.remove('active');
+        panelRandom.style.display = 'block';
+        panelDiceware.style.display = 'none';
+        generate();
+    });
+
+    tabDiceware.addEventListener('click', () => {
+        currentMode = 'diceware';
+        tabDiceware.classList.add('active');
+        tabRandom.classList.remove('active');
+        panelDiceware.style.display = 'block';
+        panelRandom.style.display = 'none';
+        generate();
+    });
+
+    rangeLength.addEventListener('input', (e) => {
+        lblLength.innerText = e.target.value;
+        generate();
+    });
+
+    rangeWords.addEventListener('input', (e) => {
+        lblWords.innerText = e.target.value;
+        generate();
+    });
+
+    [chkUpper, chkLower, chkNum, chkSym, chkAmbiguous].forEach(chk => {
+        chk.addEventListener('change', generate);
+    });
+
+    btnGenerate.addEventListener('click', generate);
+
+    // Boshlang'ich ishga tushirish
+    generate();
+</script>
+
+</body>
+</html>
