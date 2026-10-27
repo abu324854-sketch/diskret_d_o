@@ -3,110 +3,459 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>O'qituvchi Kabineti | Ekotizim</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Xaffman Kodlash va Siqish Tizimi - Kurs Ishi</title>
+    <!-- Google Fonts va FontAwesome -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Fira+Code:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        :root {
+            --bg-color: #0b0f19;
+            --card-bg: #111827;
+            --primary: #6366f1;
+            --primary-hover: #4f46e5;
+            --accent: #10b981;
+            --text-main: #f3f4f6;
+            --text-muted: #9ca3af;
+            --border: #374151;
+            --danger: #ef4444;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+            padding: 20px;
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
+        }
+
+        header h1 {
+            font-size: 2rem;
+            color: #fff;
+            margin-bottom: 8px;
+            background: linear-gradient(90deg, #818cf8, #34d399);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        header p {
+            color: var(--text-muted);
+            font-size: 0.95rem;
+        }
+
+        .student-badge {
+            display: inline-block;
+            margin-top: 12px;
+            padding: 6px 16px;
+            background: rgba(99, 102, 241, 0.15);
+            border: 1px solid var(--primary);
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #818cf8;
+        }
+
+        .grid-layout {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 20px;
+        }
+
+        @media (min-width: 992px) {
+            .grid-layout {
+                grid-template-columns: 1fr 1fr;
+            }
+        }
+
+        .card {
+            background: var(--card-bg);
+            border: 1px solid var(--border);
+            border-radius: 16px;
+            padding: 24px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.3);
+            display: flex;
+            flex-direction: column;
+            gap: 16px;
+        }
+
+        .section-title {
+            font-size: 1.15rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            color: #818cf8;
+            border-bottom: 1px solid var(--border);
+            padding-bottom: 10px;
+        }
+
+        textarea {
+            width: 100%;
+            height: 130px;
+            background: #030712;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            color: #fff;
+            padding: 14px;
+            font-size: 0.95rem;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.3s;
+        }
+
+        textarea:focus {
+            border-color: var(--primary);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 12px;
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.1s;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn:hover {
+            background: var(--primary-hover);
+        }
+
+        .btn:active {
+            transform: scale(0.98);
+        }
+
+        .btn-success {
+            background: var(--accent);
+        }
+        .btn-success:hover {
+            background: #059669;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+        }
+
+        .stat-card {
+            background: #030712;
+            padding: 12px;
+            border-radius: 10px;
+            border: 1px solid var(--border);
+            text-align: center;
+        }
+
+        .stat-card .label {
+            font-size: 0.75rem;
+            color: var(--text-muted);
+            margin-bottom: 4px;
+        }
+
+        .stat-card .value {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #fff;
+        }
+
+        .code-output {
+            background: #030712;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            padding: 14px;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.85rem;
+            color: #34d399;
+            max-height: 120px;
+            overflow-y: auto;
+            word-break: break-all;
+        }
+
+        /* Jadval uslubi */
+        .table-container {
+            max-height: 250px;
+            overflow-y: auto;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            text-align: left;
+        }
+
+        th, td {
+            padding: 10px 14px;
+            border-bottom: 1px solid var(--border);
+        }
+
+        th {
+            background: #030712;
+            color: var(--text-muted);
+            position: sticky;
+            top: 0;
+            z-index: 1;
+        }
+
+        tr:hover {
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .full-width {
+            grid-column: 1 / -1;
+        }
+    </style>
 </head>
-<body class="bg-gray-100 font-sans">
+<body>
 
-    <div class="max-w-4xl mx-auto p-6">
-        <!-- Header -->
-        <header class="bg-white shadow-md rounded-xl p-6 mb-6">
-            <h1 class="text-2xl font-bold text-gray-800">👨‍🏫 O'qituvchi Kabineti</h1>
-            <p class="text-gray-600">Guruhlarga mustaqil ish berish va talabalar natijalarini tekshirish.</p>
-        </header>
+<div class="container">
+    <header>
+        <h1><i class="fa-solid fa-tree"><b></b>fa-network-wired</i> Ma'lumotlarni Siqish: Xaffman Daraxti</h1>
+        <p>Optimal kodlash nazariyasi va ierarxik ma'lumotlar tuzilmasi asosida matnni siqish va tiklash tizimi</p>
+        <div class="student-badge">
+            <i class="fa-solid fa-graduation-cap"></i> Talaba: Muhammadiv Diyorbek Mirzaliyev Oyatullo
+        </div>
+    </header>
 
-        <!-- Guruhni tanlash -->
-        <div class="bg-white shadow-md rounded-xl p-6 mb-6">
-            <label class="block text-gray-700 font-semibold mb-2">O'qitish guruhini tanlang:</label>
-            <select id="groupSelect" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500" onchange="renderStudents()">
-                <option value="F-KI-101-25">F-KI-101-25</option>
-                <option value="F-KI-102-25">F-KI-102-25</option>
-            </select>
+    <div class="grid-layout">
+        <!-- KIRISH MA'LUMOTI -->
+        <div class="card">
+            <div class="section-title">
+                <i class="fa-solid fa-pen-to-square"></i> Matnni Kiriting (Asl Ma'lumot)
+            </div>
+            <textarea id="inputText" placeholder="Shu yerga siqish uchun istalgan matn yozing...">Salom dunyo! Bu Xaffman kodlash orqali ma'lumotlarni optimal siqish va dekodlash bo'yicha maxsus kurs ishi dasturi.</textarea>
+            
+            <div class="btn-group">
+                <button class="btn" id="processBtn">
+                    <i class="fa-solid fa-cogs"></i> Xaffman Daraxtini Qurish & Siqish
+                </button>
+            </div>
         </div>
 
-        <!-- Talabalar ro'yxati -->
-        <div class="bg-white shadow-md rounded-xl p-6 mb-6">
-            <h2 class="text-xl font-bold text-gray-800 mb-4">👥 Talabalar ro'yxati va ishlari</h2>
-            <div id="studentList" class="divide-y divide-gray-200">
-                <!-- JavaScript orqali to'ldiriladi -->
+        <!-- STATISTIKA VA NATIJA -->
+        <div class="card">
+            <div class="section-title">
+                <i class="fa-solid fa-chart-pie"></i> Siqilish Samaradorligi Tahlili
+            </div>
+            
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="label">Asl hajm (ASCII)</div>
+                    <div class="value" id="origSize">0 bit</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Siqilgan hajm</div>
+                    <div class="value" id="compSize" style="color: #34d399;">0 bit</div>
+                </div>
+                <div class="stat-card">
+                    <div class="label">Tejamkorlik</div>
+                    <div class="value" id="savingRate" style="color: #818cf8;">0%</div>
+                </div>
+            </div>
+
+            <div>
+                <div style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 6px;">Binarni Kodlangan Ko'rinishi:</div>
+                <div class="code-output" id="encodedOutput">Kutilmoqda...</div>
             </div>
         </div>
 
-        <!-- Yangi topshiriq berish -->
-        <div class="bg-white shadow-md rounded-xl p-6">
-            <h2 class="text-xl font-bold text-gray-800 mb-4">📝 Guruhga Yangi Mustaqil Ish Berish</h2>
-            <div class="mb-4">
-                <label class="block text-gray-700 font-semibold mb-2">Topshiriq mavzusi:</label>
-                <input type="text" id="taskTitle" placeholder="Masalan: Web dasturlash asoslari mustaqil ishi" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+        <!-- SIMVOLLAR VA XAFFMAN KODLARI JADVALI -->
+        <div class="card">
+            <div class="section-title">
+                <i class="fa-solid fa-table-list"></i> Chastotalar va Xaffman Kodlari Jadvali
             </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 font-semibold mb-2">Topshirish muddati:</label>
-                <input type="date" id="taskDeadline" class="w-full border border-gray-300 rounded-lg p-3 focus:outline-none focus:ring-2 focus:ring-blue-500">
+            <div class="table-container">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Simvol</th>
+                            <th>Chastota (Soni)</th>
+                            <th>Xaffman Kodi</th>
+                            <th>Bit uzunligi</th>
+                        </tr>
+                    </thead>
+                    <tbody id="frequencyTableBody">
+                        <!-- Dinamik to'ldiriladi -->
+                    </tbody>
+                </table>
             </div>
-            <button onclick="assignTask()" class="bg-blue-600 text-white font-semibold px-6 py-3 rounded-lg hover:bg-blue-700 transition">Topshiriqni yuborish</button>
-            <p id="successMsg" class="text-green-600 mt-3 hidden">Topshiriq guruhga muvaffaqiyatli yuborildi!</p>
+        </div>
+
+        <!-- DEKODLASH (TIKLASH) QISMI -->
+        <div class="card">
+            <div class="section-title">
+                <i class="fa-solid fa-rotate-left"></i> Dekodlash (Ma'lumotni Tiklash)
+            </div>
+            <p style="font-size: 0.85rem; color: var(--text-muted);">Siqilgan binar kod orqali asl matnni yo'qotishlarsiz qayta tiklash:</p>
+            <div class="code-output" id="decodedOutput" style="color: #f3f4f6;">Kutilmoqda...</div>
+            <button class="btn btn-success" id="decodeBtn">
+                <i class="fa-solid fa-shield-check"></i> Matnni To'liq Tekshirish va Tiklash
+            </button>
         </div>
     </div>
+</div>
 
-    <script>
-        // Simulyatsiya qilingan baza
-        const studentsData = [
-            { id: 1, name: "Alisherov B.", group: "F-KI-101-25", status: "Topshirilmagan" },
-            { id: 2, name: "Karimova Z.", group: "F-KI-101-25", status: "Topshirilgan" },
-            { id: 3, name: "Tohirov M.", group: "F-KI-102-25", status: "Topshirilmagan" }
-        ];
+<script>
+    // Xaffman Tugun (Node) klassi
+    class HuffmanNode {
+        constructor(char, freq, left = null, right = null) {
+            this.char = char;
+            this.freq = freq;
+            this.left = left;
+            this.right = right;
+        }
+    }
 
-        function renderStudents() {
-            const selectedGroup = document.getElementById('groupSelect').value;
-            const container = document.getElementById('studentList');
-            container.innerHTML = '';
+    function buildHuffmanTree(text) {
+        if (!text) return null;
 
-            const filtered = studentsData.filter(s => s.group === selectedGroup);
-
-            if (filtered.length === 0) {
-                container.innerHTML = '<p class="text-gray-500 py-3">Bu guruhda talabalar yo\'q.</p>';
-                return;
-            }
-
-            filtered.forEach(student => {
-                const row = document.createElement('div');
-                row.className = 'py-3 flex justify-between items-center';
-                row.innerHTML = `
-                    <div>
-                        <span class="font-medium text-gray-800">${student.name}</span>
-                        <span class="ml-4 text-sm px-2 py-1 rounded ${student.status === 'Topshirilgan' ? 'bg-green-100 text-green-700' : 'bg-yellow-100 text-yellow-700'}">${student.status}</span>
-                    </div>
-                    <button onclick="evaluateStudent(${student.id})" class="bg-green-600 text-white px-4 py-2 rounded-lg text-sm hover:bg-green-700 transition">Baholash</button>
-                `;
-                container.appendChild(row);
-            });
+        // 1. Chastotalarni hisoblash
+        const frequencies = {};
+        for (let char of text) {
+            frequencies[char] = (frequencies[char] || 0) + 1;
         }
 
-        function evaluateStudent(id) {
-            const student = studentsData.find(s => s.id === id);
-            if (student) {
-                student.status = "Baholandi";
-                alert(`${student.name} ning ishi qabul qilindi va baho qo'yildi!`);
-                renderStudents();
-            }
+        // 2. Ustuvor navbat (Priority Queue) yaratish
+        let nodes = Object.keys(frequencies).map(char => new HuffmanNode(char, frequencies[char]));
+
+        if (nodes.length === 1) {
+            // Agar matnda faqat 1 xil simvol bo'lsa
+            let parent = new HuffmanNode(null, nodes[0].freq, nodes[0], null);
+            return { root: parent, frequencies };
         }
 
-        function assignTask() {
-            const title = document.getElementById('taskTitle').value;
-            const deadline = document.getElementById('taskDeadline').value;
-            if (title && deadline) {
-                const msg = document.getElementById('successMsg');
-                msg.classList.remove('hidden');
-                setTimeout(() => msg.classList.add('hidden'), 3000);
-                document.getElementById('taskTitle').value = '';
+        while (nodes.length > 1) {
+            nodes.sort((a, b) => a.freq - b.freq);
+            let left = nodes.shift();
+            let right = nodes.shift();
+
+            let parent = new HuffmanNode(null, left.freq + right.freq, left, right);
+            nodes.push(parent);
+        }
+
+        return { root: nodes[0], frequencies };
+    }
+
+    // Kodlarni rekursiv hosil qilish
+    function generateCodes(node, currentCode = '', codes = {}) {
+        if (!node) return;
+
+        if (node.char !== null) {
+            codes[node.char] = currentCode || '0'; // Agar bitta simvol bo'lsa '0' beriladi
+            return;
+        }
+
+        generateCodes(node.left, currentCode + '0', codes);
+        generateCodes(node.right, currentCode + '1', codes);
+
+        return codes;
+    }
+
+    // Dekodlash funksiyasi
+    function decodeHuffman(root, encodedStr) {
+        let decodedText = '';
+        let currentNode = root;
+
+        for (let bit of encodedStr) {
+            if (bit === '0') {
+                currentNode = currentNode.left;
             } else {
-                alert("Iltimos, barcha maydonlarni to'ldiring!");
+                currentNode = currentNode.right;
+            }
+
+            if (currentNode.char !== null) {
+                decodedText += currentNode.char;
+                currentNode = root;
             }
         }
+        return decodedText;
+    }
 
-        // Boshlang'ich yuklash
-        renderStudents();
-    </script>
-</body>
-</html>
+    // Asosiy ishga tushirish funksiyasi
+    function runHuffman() {
+        const text = document.getElementById('inputText').value;
+        if (!text) {
+            alert("Iltimos, matn kiriting!");
+            return;
+        }
+
+        const { root, frequencies } = buildHuffmanTree(text);
+        const huffmanCodes = generateCodes(root);
+
+        // Matnni kodlash
+        let encodedStr = '';
+        for (let char of text) {
+            encodedStr += huffmanCodes[char];
+        }
+
+        // Hajmlarni hisoblash (Asl matn: har bir belgi 8 bit ASCII deb olinadi)
+        const origBits = text.length * 8;
+        const compBits = encodedStr.length;
+        const saving = ((1 - (compBits / origBits)) * 100).toFixed(1);
+
+        // Natijalarni UI ga chiqarish
+        document.getElementById('origSize').innerText = `${origBits} bit (${text.length} bayt)`;
+        document.getElementById('compSize').innerText = `${compBits} bit`;
+        document.getElementById('savingRate').innerText = `${saving > 0 ? saving : 0}% tejamkorlik`;
+        document.getElementById('encodedOutput').innerText = encodedStr;
+
+        // Jadvalni to'ldirish
+        const tbody = document.getElementById('frequencyTableBody');
+        tbody.innerHTML = '';
+        
+        // Chastota bo'yicha kamayish tartibida saralash
+        const sortedChars = Object.keys(frequencies).sort((a, b) => frequencies[b] - frequencies[a]);
+
+        for (let char of sortedChars) {
+            const displayChar = char === ' ' ? '[BO‘SHLIQ (Space)]' : (char === '\n' ? '[YANGI QATOR]' : char);
+            const row = `<tr>
+                <td><b>${displayChar}</b></td>
+                <td>${frequencies[char]}</td>
+                <td><code style="color: #34d399;">${huffmanCodes[char]}</code></td>
+                <td>${huffmanCodes[char].length} bit</td>
+            </tr>`;
+            tbody.innerHTML += row;
+        }
+
+        // Global saqlash dekodlash uchun
+        window.huffmanRoot = root;
+        window.encodedData = encodedStr;
+        document.getElementById('decodedOutput').innerText = "Tayyor. Pastdagi tugmani bosing.";
+    }
+
+    // Dekoderni ishlatish
+    document.getElementById('decodeBtn').
