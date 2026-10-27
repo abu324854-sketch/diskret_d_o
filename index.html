@@ -3,964 +3,607 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CyberGuard Pro - Parollar Generatori va Tahlil Platformasi</title>
-    <!-- Google Fonts va FontAwesome Icons -->
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    
+    <title>Xaffman Kodlash Daraxti va Ma'lumotlarni Siqish Laboratoriyasi</title>
     <style>
         :root {
-            --bg-deep: #090d16;
-            --bg-card: rgba(19, 27, 46, 0.75);
-            --bg-input: #0b1120;
-            --border: rgba(255, 255, 255, 0.08);
-            --border-focus: #3b82f6;
-            
-            --primary: #38bdf8;
-            --primary-glow: rgba(56, 189, 248, 0.25);
-            --accent: #6366f1;
-            
-            --text-main: #f1f5f9;
-            --text-muted: #64748b;
-            --text-sub: #94a3b8;
-
-            --danger: #f43f5e;
-            --warning: #f59e0b;
-            --good: #10b981;
-            --strong: #06b6d4;
-            --bulletproof: #8b5cf6;
+            --bg-primary: #0f172a;
+            --bg-secondary: #1e293b;
+            --bg-card: #334155;
+            --text-main: #f8fafc;
+            --text-muted: #94a3b8;
+            --accent-green: #10b981;
+            --accent-blue: #3b82f6;
+            --accent-purple: #8b5cf6;
+            --accent-orange: #f59e0b;
+            --border-color: #475569;
         }
 
         * {
             box-sizing: border-box;
             margin: 0;
             padding: 0;
-            font-family: 'Plus Jakarta Sans', sans-serif;
-            -webkit-font-smoothing: antialiased;
+            font-family: 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
         }
 
         body {
-            background-color: var(--bg-deep);
-            background-image: 
-                radial-gradient(at 10% 10%, rgba(99, 102, 241, 0.12) 0px, transparent 50%),
-                radial-gradient(at 90% 90%, rgba(56, 189, 248, 0.1) 0px, transparent 50%);
-            background-attachment: fixed;
+            background-color: var(--bg-primary);
             color: var(--text-main);
-            min-height: 100vh;
+            padding: 20px;
+            line-height: 1.5;
+        }
+
+        .header {
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 24px;
+            box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.5);
             display: flex;
-            justify-content: center;
+            justify-content: space-between;
             align-items: center;
-            padding: 24px 16px;
+            flex-wrap: wrap;
+            gap: 20px;
         }
 
-        .mono {
-            font-family: 'JetBrains Mono', monospace;
-        }
-
-        .app-container {
-            width: 100%;
-            max-width: 1100px;
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 24px;
-        }
-
-        @media (min-width: 900px) {
-            .app-container {
-                grid-template-columns: 1.1fr 0.9fr;
-            }
-            .header-block {
-                grid-column: 1 / -1;
-            }
-        }
-
-        /* Card Styles */
-        .card {
-            background: var(--bg-card);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid var(--border);
-            border-radius: 20px;
-            padding: 28px;
-            box-shadow: 0 20px 40px -15px rgba(0, 0, 0, 0.5);
-        }
-
-        .header-block {
-            text-align: center;
-            padding: 10px 0 0;
-        }
-
-        .header-block .badge {
-            background: rgba(56, 189, 248, 0.1);
-            color: var(--primary);
-            border: 1px solid rgba(56, 189, 248, 0.2);
-            padding: 6px 14px;
-            border-radius: 30px;
-            font-size: 0.8rem;
-            font-weight: 600;
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            margin-bottom: 12px;
-        }
-
-        .header-block h1 {
-            font-size: 2.2rem;
-            font-weight: 800;
-            letter-spacing: -0.02em;
-            background: linear-gradient(135deg, #fff 0%, #94a3b8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+        .header-title h1 {
+            font-size: 26px;
+            color: #60a5fa;
             margin-bottom: 6px;
         }
 
-        .header-block p {
-            color: var(--text-sub);
-            font-size: 0.95rem;
-        }
-
-        .section-title {
-            font-size: 1.15rem;
-            font-weight: 700;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            color: #fff;
-        }
-
-        .section-title span {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-
-        .section-title i {
-            color: var(--primary);
-        }
-
-        /* Input Controls */
-        .input-wrapper {
-            position: relative;
-            margin-bottom: 16px;
-        }
-
-        .input-wrapper input {
-            width: 100%;
-            padding: 16px 50px 16px 16px;
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            color: #fff;
-            font-size: 1.1rem;
-            outline: none;
-            transition: all 0.25s ease;
-        }
-
-        .input-wrapper input:focus {
-            border-color: var(--border-focus);
-            box-shadow: 0 0 0 4px var(--primary-glow);
-        }
-
-        .input-wrapper .action-btn {
-            position: absolute;
-            right: 12px;
-            top: 50%;
-            transform: translateY(-50%);
-            background: transparent;
-            border: none;
+        .header-title p {
             color: var(--text-muted);
-            cursor: pointer;
-            padding: 8px;
-            font-size: 1.1rem;
+            font-size: 14px;
+        }
+
+        .authors-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--accent-purple);
+            padding: 12px 20px;
             border-radius: 8px;
-            transition: color 0.2s;
         }
 
-        .input-wrapper .action-btn:hover {
-            color: #fff;
-        }
-
-        /* Progress Bar */
-        .meter-container {
-            margin-bottom: 20px;
-        }
-
-        .meter-bg {
-            height: 10px;
-            background: var(--bg-input);
-            border-radius: 6px;
-            overflow: hidden;
-            border: 1px solid var(--border);
-            margin-bottom: 10px;
-        }
-
-        .meter-fill {
-            height: 100%;
-            width: 0%;
-            transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1), background-color 0.4s;
-        }
-
-        .meter-status {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .status-tag {
-            font-size: 0.85rem;
-            font-weight: 700;
+        .authors-card h3 {
+            font-size: 13px;
             text-transform: uppercase;
-            letter-spacing: 0.05em;
-            padding: 4px 10px;
-            border-radius: 6px;
-        }
-
-        .entropy-tag {
-            font-size: 0.85rem;
-            color: var(--text-sub);
-        }
-
-        /* Pattern Warnings */
-        .warnings-box {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin-bottom: 20px;
-        }
-
-        .warning-chip {
-            font-size: 0.75rem;
-            padding: 4px 10px;
-            border-radius: 6px;
-            background: rgba(244, 63, 94, 0.1);
-            color: var(--danger);
-            border: 1px solid rgba(244, 63, 94, 0.2);
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 12px;
-            margin-bottom: 20px;
-        }
-
-        .stat-card {
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            padding: 14px;
-            border-radius: 10px;
-        }
-
-        .stat-card .lbl {
-            font-size: 0.75rem;
-            color: var(--text-muted);
+            letter-spacing: 1px;
+            color: var(--accent-purple);
             margin-bottom: 4px;
-            text-transform: uppercase;
-            letter-spacing: 0.03em;
         }
 
-        .stat-card .val {
-            font-size: 0.95rem;
+        .authors-card p {
             font-weight: 600;
+            font-size: 15px;
             color: #fff;
-            word-break: break-all;
         }
 
-        /* Crack Time Breakdown */
-        .crack-times {
-            background: var(--bg-input);
-            border: 1px solid var(--border);
-            border-radius: 12px;
-            padding: 16px;
-        }
-
-        .crack-times-header {
-            font-size: 0.8rem;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
-            margin-bottom: 12px;
-            font-weight: 600;
-        }
-
-        .crack-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 8px 0;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.04);
-            font-size: 0.88rem;
-        }
-
-        .crack-row:last-child {
-            border-bottom: none;
-        }
-
-        .crack-row .hardware {
-            color: var(--text-sub);
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .crack-row .time {
-            font-weight: 600;
-            color: var(--primary);
-        }
-
-        /* Generator Tabs & Controls */
-        .tab-group {
-            display: flex;
-            background: var(--bg-input);
-            padding: 4px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            border: 1px solid var(--border);
-        }
-
-        .tab-btn {
-            flex: 1;
-            padding: 8px;
-            background: transparent;
-            border: none;
-            color: var(--text-sub);
-            font-weight: 600;
-            font-size: 0.85rem;
-            border-radius: 8px;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .tab-btn.active {
-            background: var(--primary);
-            color: #000;
-        }
-
-        .control-group {
-            margin-bottom: 20px;
-        }
-
-        .control-group label {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.9rem;
-            margin-bottom: 10px;
-            color: var(--text-sub);
-        }
-
-        .control-group label span.val {
-            color: var(--primary);
-            font-weight: 700;
-        }
-
-        input[type="range"] {
-            width: 100%;
-            height: 6px;
-            background: var(--bg-input);
-            border-radius: 3px;
-            outline: none;
-            accent-color: var(--primary);
-        }
-
-        .checkbox-grid {
+        .grid-layout {
             display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 12px;
-            margin-bottom: 24px;
+            grid-template-columns: 1fr 1.2fr;
+            gap: 24px;
         }
 
-        .check-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-size: 0.88rem;
-            color: var(--text-sub);
-            cursor: pointer;
-            user-select: none;
-        }
-
-        .check-item input[type="checkbox"] {
-            width: 18px;
-            height: 18px;
-            accent-color: var(--primary);
-            cursor: pointer;
-        }
-
-        /* Action Buttons */
-        .btn-primary {
-            width: 100%;
-            padding: 14px;
-            background: linear-gradient(135deg, var(--primary) 0%, var(--accent) 100%);
-            color: #fff;
-            border: none;
-            border-radius: 10px;
-            font-weight: 700;
-            font-size: 0.95rem;
-            cursor: pointer;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            gap: 8px;
-            box-shadow: 0 4px 15px rgba(56, 189, 248, 0.2);
-            transition: transform 0.15s, box-shadow 0.15s;
-        }
-
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(56, 189, 248, 0.35);
-        }
-
-        .btn-primary:active {
-            transform: translateY(0);
-        }
-
-        /* Mathematical Explanations */
-        .math-card {
-            grid-column: 1 / -1;
-            background: rgba(11, 17, 32, 0.8);
-            border: 1px dashed var(--border);
-            border-radius: 16px;
-            padding: 20px;
-        }
-
-        .math-title {
-            font-size: 0.9rem;
-            font-weight: 700;
-            color: #fff;
-            margin-bottom: 10px;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .math-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-            font-size: 0.82rem;
-            color: var(--text-sub);
-            line-height: 1.6;
-        }
-
-        @media (min-width: 600px) {
-            .math-grid {
-                grid-template-columns: repeat(3, 1fr);
+        @media (max-width: 1024px) {
+            .grid-layout {
+                grid-template-columns: 1fr;
             }
         }
 
-        .math-item {
-            background: rgba(255, 255, 255, 0.02);
-            padding: 12px;
-            border-radius: 8px;
-            border: 1px solid rgba(255, 255, 255, 0.03);
+        .card {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 24px;
         }
 
-        .math-item code {
-            color: var(--primary);
-            font-size: 0.85rem;
-            display: block;
-            margin-top: 4px;
-        }
-
-        /* Toast Alert */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            background: var(--good);
-            color: #000;
-            padding: 10px 18px;
-            border-radius: 8px;
+        .card-title {
+            font-size: 18px;
             font-weight: 600;
-            font-size: 0.85rem;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+            margin-bottom: 16px;
+            color: #38bdf8;
             display: flex;
             align-items: center;
             gap: 8px;
-            transform: translateY(100px);
-            opacity: 0;
-            transition: all 0.3s ease;
         }
 
-        .toast.show {
-            transform: translateY(0);
-            opacity: 1;
+        textarea {
+            width: 100%;
+            height: 110px;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            color: var(--text-main);
+            padding: 12px;
+            font-size: 14px;
+            resize: vertical;
+            outline: none;
+            transition: border-color 0.2s;
+        }
+
+        textarea:focus {
+            border-color: var(--accent-blue);
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 10px;
+            margin-top: 12px;
+        }
+
+        button {
+            background-color: var(--accent-blue);
+            color: white;
+            border: none;
+            padding: 10px 18px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: translateY(-1px);
+        }
+
+        button.btn-secondary {
+            background-color: var(--bg-card);
+            color: var(--text-main);
+            border: 1px solid var(--border-color);
+        }
+
+        .metrics-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .metric-box {
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            text-align: center;
+        }
+
+        .metric-box label {
+            display: block;
+            font-size: 11px;
+            color: var(--text-muted);
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+
+        .metric-box span {
+            font-size: 18px;
+            font-weight: 700;
+            color: var(--accent-green);
+        }
+
+        .table-container {
+            overflow-x: auto;
+            max-height: 250px;
+            overflow-y: auto;
+            margin-top: 16px;
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            text-align: left;
+            font-size: 13px;
+        }
+
+        th, td {
+            padding: 10px 12px;
+            border-bottom: 1px solid var(--border-color);
+        }
+
+        th {
+            background-color: var(--bg-card);
+            color: var(--text-muted);
+            position: sticky;
+            top: 0;
+        }
+
+        tr:hover {
+            background-color: rgba(255, 255, 255, 0.03);
+        }
+
+        .tree-container {
+            width: 100%;
+            height: 480px;
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .node circle {
+            fill: var(--bg-card);
+            stroke: var(--accent-blue);
+            stroke-width: 2px;
+            transition: all 0.3s;
+        }
+
+        .node.leaf circle {
+            fill: #064e3b;
+            stroke: var(--accent-green);
+        }
+
+        .node text {
+            fill: var(--text-main);
+            font-size: 12px;
+            font-weight: 600;
+            text-anchor: middle;
+            dominant-baseline: central;
+        }
+
+        .link {
+            fill: none;
+            stroke: var(--border-color);
+            stroke-width: 2px;
+        }
+
+        .link-label {
+            fill: var(--accent-orange);
+            font-size: 12px;
+            font-weight: bold;
+            text-anchor: middle;
+        }
+
+        .code-output {
+            background-color: var(--bg-primary);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 12px;
+            font-family: monospace;
+            word-break: break-all;
+            max-height: 120px;
+            overflow-y: auto;
+            color: var(--accent-orange);
+            font-size: 13px;
         }
     </style>
 </head>
 <body>
 
-<div class="app-container">
-    
-    <!-- HEADER -->
-    <div class="header-block">
-        <div class="badge"><i class="fa-solid fa-shield-cat"></i> Kibervaffsizlik Loyihasi</div>
-        <h1>Parollar Tahlili va Generatsiyasi</h1>
-        <p>Ehtimollar nazariyasi hamda Shannon entropiyasi formulasi asosida xavfsizlikni baholash</p>
+    <div class="header">
+        <div class="header-title">
+            <h1>Xaffman Kodlash va Ma'lumotlarni Siqish Laboratoriyasi</h1>
+            <p>Ierarxik Daraxtlar va Optimal Kodlash Nazariyasi Bo'yicha Kurs Ishi Loyihasi</p>
+        </div>
+        <div class="authors-card">
+            <h3>Bajaruvchilar:</h3>
+            <p>Muhammadiv Diyorbek</p>
+            <p>Mirzaliyev Oyatullo</p>
+        </div>
     </div>
 
-    <!-- TAHLIL QISMI -->
-    <div class="card">
-        <div class="section-title">
-            <span><i class="fa-solid fa-chart-line"></i> Parol Audit Tizimi</span>
+    <div class="grid-layout">
+        <!-- Chap tomondagi panel: Kirish va Analitika -->
+        <div>
+            <div class="card">
+                <div class="card-title">1. Matnli Ma'lumotni Kiritish</div>
+                <textarea id="inputText" placeholder="Kodlash uchun matn kiriting...">Xaffman kodlash algoritmi ma'lumotlarni siqishda eng optimal daraxt tuzilmasini barpo etadi.</textarea>
+                <div class="btn-group">
+                    <button onclick="processHuffman()">Daraxt Yaratish & Siqish</button>
+                    <button class="btn-secondary" onclick="loadSampleText()">Namuna Matn</button>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">2. Axborot-Nazariy Analitika</div>
+                <div class="metrics-grid">
+                    <div class="metric-box">
+                        <label>Asl O'lcham</label>
+                        <span id="originalSize">0 bit</span>
+                    </div>
+                    <div class="metric-box">
+                        <label>Siqilgan O'lcham</label>
+                        <span id="compressedSize">0 bit</span>
+                    </div>
+                    <div class="metric-box">
+                        <label>Siqish Nisbati</label>
+                        <span id="compressionRatio">0%</span>
+                    </div>
+                    <div class="metric-box">
+                        <label>Entropiya H(X)</label>
+                        <span id="entropyValue">0</span>
+                    </div>
+                </div>
+
+                <div class="table-container">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Belgi</th>
+                                <th>Chastota</th>
+                                <th>Ehtimollik</th>
+                                <th>Xaffman Kodu</th>
+                                <th>Uzunlik</th>
+                            </tr>
+                        </thead>
+                        <tbody id="freqTableBody">
+                            <!-- JS orqali to'ldiriladi -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="card">
+                <div class="card-title">3. Ikkilik (Binary) Stream & Dekodlash</div>
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px;">SIQILGAN BITSTREAM (KODLANGAN):</label>
+                <div class="code-output" id="binaryStream">-</div>
+                <br>
+                <label style="font-size: 12px; color: var(--text-muted); display: block; margin-bottom: 6px;">QAYTA TIKLANGAN MATN (DEKODLANGAN):</label>
+                <div class="code-output" id="decodedText" style="color: var(--accent-green);">-</div>
+            </div>
         </div>
 
-        <div class="input-wrapper">
-            <input type="password" id="inputPassword" class="mono" placeholder="Parolni kiriting yoki tekshiring..." autocomplete="off">
-            <button class="action-btn" id="btnToggleVis"><i class="fa-regular fa-eye"></i></button>
-            <button class="action-btn" id="btnCopy" style="right: 45px;"><i class="fa-regular fa-copy"></i></button>
-        </div>
-
-        <div class="meter-container">
-            <div class="meter-bg">
-                <div class="meter-fill" id="meterFill"></div>
-            </div>
-            <div class="meter-status">
-                <span class="status-tag" id="statusTag">Kutilmoqda</span>
-                <span class="entropy-tag mono" id="entropyVal">0.0 bit</span>
+        <!-- O'ng tomondagi panel: Daraxt Vizualizatsiyasi -->
+        <div>
+            <div class="card">
+                <div class="card-title">4. Interaktiv Xaffman Ierarxik Daraxti</div>
+                <p style="font-size: 12px; color: var(--text-muted); margin-bottom: 12px;">
+                    Daraxt tugunlaridagi sonlar belgilarning umumiy chastotasini bildiradi. Yashil tugunlar — haqiqiy harflar (barglar).
+                </p>
+                <div class="tree-container">
+                    <svg id="treeSvg"></svg>
+                </div>
             </div>
         </div>
+    </div>
 
-        <!-- Pattern Ogohlantirishlari -->
-        <div class="warnings-box" id="warningsBox"></div>
+    <script>
+        class HuffmanNode {
+            constructor(char, freq, left = null, right = null) {
+                this.char = char;
+                this.freq = freq;
+                this.left = left;
+                this.right = right;
+            }
+        }
 
-        <!-- Statistika -->
-        <div class="stats-grid">
-            <div class="stat-card">
-                <div class="lbl">Alifbo o'lchami (N)</div>
-                <div class="val mono" id="statN">0 belgi</div>
-            </div>
-            <div class="stat-card">
-                <div class="lbl">Kombinatsiyalar (Nᴸ)</div>
-                <div class="val mono" id="statCombinations">0</div>
-            </div>
-        </div>
+        function buildHuffmanTree(text) {
+            if (!text) return null;
 
-        <!-- Buzish Vaqtlari -->
-        <div class="crack-times">
-            <div class="crack-times-header">Buzib kirish taxminiy vaqti (Brute-Force)</div>
+            // 1. Chastotalarni hisoblash
+            const freqMap = {};
+            for (let char of text) {
+                freqMap[char] = (freqMap[char] || 0) + 1;
+            }
+
+            // 2. Min-Heap (ustuvor navbat) yaratish
+            const nodes = Object.keys(freqMap).map(char => new HuffmanNode(char, freqMap[char]));
+
+            if (nodes.length === 1) {
+                return new HuffmanNode(null, nodes[0].freq, nodes[0]);
+            }
+
+            while (nodes.length > 1) {
+                nodes.sort((a, b) => a.freq - b.freq);
+                const left = nodes.shift();
+                const right = nodes.shift();
+
+                const parent = new HuffmanNode(null, left.freq + right.freq, left, right);
+                nodes.push(parent);
+            }
+
+            return { root: nodes[0], freqMap };
+        }
+
+        function generateCodes(node, code = "", codes = {}) {
+            if (!node) return codes;
+
+            if (node.char !== null) {
+                codes[node.char] = code || "0";
+            }
+
+            generateCodes(node.left, code + "0", codes);
+            generateCodes(node.right, code + "1", codes);
+
+            return codes;
+        }
+
+        function calculateEntropy(freqMap, totalChars) {
+            let entropy = 0;
+            for (let char in freqMap) {
+                let p = freqMap[char] / totalChars;
+                entropy -= p * Math.log2(p);
+            }
+            return entropy.toFixed(3);
+        }
+
+        function decodeStream(root, binaryStr) {
+            if (!root) return "";
+            let result = "";
+            let curr = root;
+
+            if (!root.left && !root.right && root.char) {
+                return binaryStr.split('').map(() => root.char).join('');
+            }
+
+            for (let bit of binaryStr) {
+                if (bit === '0') curr = curr.left;
+                else if (bit === '1') curr = curr.right;
+
+                if (curr && curr.char !== null) {
+                    result += curr.char;
+                    curr = root;
+                }
+            }
+            return result;
+        }
+
+        function processHuffman() {
+            const text = document.getElementById('inputText').value;
+            if (!text) return;
+
+            const treeData = buildHuffmanTree(text);
+            if (!treeData) return;
+
+            const { root, freqMap } = treeData;
+            const codes = generateCodes(root);
+
+            // Analitika
+            const totalChars = text.length;
+            const originalBits = totalChars * 8;
+            let compressedBits = 0;
+
+            let tableHtml = "";
+            for (let char in freqMap) {
+                const count = freqMap[char];
+                const prob = (count / totalChars).toFixed(3);
+                const code = codes[char];
+                compressedBits += count * code.length;
+
+                const displayChar = char === ' ' ? '␣ (bo\'shliq)' : (char === '\n' ? '↵ (yangi qator)' : char);
+                tableHtml += `
+                    <tr>
+                        <td style="font-weight: bold; color: #60a5fa;">${displayChar}</td>
+                        <td>${count}</td>
+                        <td>${prob}</td>
+                        <td style="font-family: monospace; color: var(--accent-orange);">${code}</td>
+                        <td>${code.length} bit</td>
+                    </tr>
+                `;
+            }
+
+            document.getElementById('freqTableBody').innerHTML = tableHtml;
+            document.getElementById('originalSize').innerText = originalBits + " bit";
+            document.getElementById('compressedSize').innerText = compressedBits + " bit";
             
-            <div class="crack-row">
-                <span class="hardware"><i class="fa-solid fa-globe"></i> Onlayn Hujum (100 req/s)</span>
-                <span class="time mono" id="timeOnline">0s</span>
-            </div>
-            <div class="crack-row">
-                <span class="hardware"><i class="fa-solid fa-laptop"></i> Oddiy Kompyuter (1M/s)</span>
-                <span class="time mono" id="timePC">0s</span>
-            </div>
-            <div class="crack-row">
-                <span class="hardware"><i class="fa-solid fa-microchip"></i> GPU Rig (100B/s)</span>
-                <span class="time mono" id="timeGPU">0s</span>
-            </div>
-            <div class="crack-row">
-                <span class="hardware"><i class="fa-solid fa-server"></i> Superkompyuter (100T/s)</span>
-                <span class="time mono" id="timeSuper">0s</span>
-            </div>
-        </div>
-    </div>
+            const ratio = ((1 - (compressedBits / originalBits)) * 100).toFixed(1);
+            document.getElementById('compressionRatio').innerText = (ratio > 0 ? ratio : 0) + "%";
+            document.getElementById('entropyValue').innerText = calculateEntropy(freqMap, totalChars) + " bit/belgi";
 
-    <!-- GENERATOR QISMI -->
-    <div class="card">
-        <div class="section-title">
-            <span><i class="fa-solid fa-wand-magic-sparkles"></i> Aqlli Generator</span>
-        </div>
+            // Bitstream
+            let encodedStream = "";
+            for (let char of text) {
+                encodedStream += codes[char];
+            }
+            document.getElementById('binaryStream').innerText = encodedStream;
 
-        <div class="tab-group">
-            <button class="tab-btn active" id="tabRandom">Tasodifiy (Random)</button>
-            <button class="tab-btn" id="tabDiceware">Diceware (Lug'atli)</button>
-        </div>
+            // Dekodlash
+            const decoded = decodeStream(root, encodedStream);
+            document.getElementById('decodedText').innerText = decoded;
 
-        <!-- Random Parametrlari -->
-        <div id="panelRandom">
-            <div class="control-group">
-                <label>
-                    <span>Parol uzunligi:</span>
-                    <span class="val mono" id="lblLength">16</span>
-                </label>
-                <input type="range" id="rangeLength" min="6" max="64" value="16">
-            </div>
-
-            <div class="checkbox-grid">
-                <label class="check-item">
-                    <input type="checkbox" id="chkUpper" checked> Katta (A-Z)
-                </label>
-                <label class="check-item">
-                    <input type="checkbox" id="chkLower" checked> Kichik (a-z)
-                </label>
-                <label class="check-item">
-                    <input type="checkbox" id="chkNum" checked> Raqamlar (0-9)
-                </label>
-                <label class="check-item">
-                    <input type="checkbox" id="chkSym" checked> Belgilar (!@#$)
-                </label>
-                <label class="check-item" style="grid-column: 1 / -1;">
-                    <input type="checkbox" id="chkAmbiguous"> Chalg'ituvchi belgilar joylanmasin (l, 1, O, 0)
-                </label>
-            </div>
-        </div>
-
-        <!-- Diceware Parametrlari -->
-        <div id="panelDiceware" style="display: none;">
-            <div class="control-group">
-                <label>
-                    <span>So'zlar soni:</span>
-                    <span class="val mono" id="lblWords">4</span>
-                </label>
-                <input type="range" id="rangeWords" min="3" max="8" value="4">
-            </div>
-            <p style="font-size: 0.8rem; color: var(--text-muted); margin-bottom: 20px;">
-                Diceware algoritmi osongina eslab qolinadigan va ayni paytda yuqori darajadagi xavfsizlikni ta'minlaydigan so'zlar birikmasini yaratadi.
-            </p>
-        </div>
-
-        <button class="btn-primary" id="btnGenerate">
-            <i class="fa-solid fa-arrows-rotate"></i> Yangi Parol Yaratish
-        </button>
-    </div>
-
-    <!-- MATEMATIK ASOSLAR (Loyiha Himoyasi Uchun) -->
-    <div class="math-card">
-        <div class="math-title"><i class="fa-solid fa-square-root-variable"></i> Loyihaning Matematik Nazariyasi</div>
-        <div class="math-grid">
-            <div class="math-item">
-                <strong>Alifbo Kengligi (N)</strong>
-                Parolda ishlatilgan belgilar turlariga qarab tanlanadi: Kichik (26), Katta (26), Raqam (10), Maxsus (32).
-                <code>N = N₁ + N₂ + ...</code>
-            </div>
-            <div class="math-item">
-                <strong>Shannon Entropiyasi (E)</strong>
-                Parol tarkibidagi axborot zichligi va tartibsizlik darajasini bitlarda o'lchovchi formula.
-                <code>E = L × log₂(N)</code>
-            </div>
-            <div class="math-item">
-                <strong>Buzish Ehtimolligi (T)</strong>
-                Brute-Force hujumi orqali to'liq qidirib chiqish uchun ketadigan o'rtacha vaqt.
-                <code>T = (Nᴸ / 2) / Speed</code>
-            </div>
-        </div>
-    </div>
-
-</div>
-
-<!-- Bildirishnoma (Toast) -->
-<div class="toast" id="toast"><i class="fa-solid fa-circle-check"></i> Nusxalandi!</div>
-
-<script>
-    // DICELI_DICTIONARY (Kichik namuna lug'at iboralar uchun)
-    const DICE_WORDS = [
-        "quyosh", "shamol", "daryo", "burgut", "qalqon", "qulf", "yulduz", "buloq", 
-        "alanga", "tuman", "o'rmon", "sayyora", "ummon", "qoya", "poydevor", "mantiq",
-        "vektor", "algoritm", "matritsa", "kripto", "parol", "tizim", "kiber", "harakat"
-    ];
-
-    // Elementlar
-    const inputPassword = document.getElementById('inputPassword');
-    const btnToggleVis = document.getElementById('btnToggleVis');
-    const btnCopy = document.getElementById('btnCopy');
-    const meterFill = document.getElementById('meterFill');
-    const statusTag = document.getElementById('statusTag');
-    const entropyVal = document.getElementById('entropyVal');
-    const warningsBox = document.getElementById('warningsBox');
-    
-    const statN = document.getElementById('statN');
-    const statCombinations = document.getElementById('statCombinations');
-    const timeOnline = document.getElementById('timeOnline');
-    const timePC = document.getElementById('timePC');
-    const timeGPU = document.getElementById('timeGPU');
-    const timeSuper = document.getElementById('timeSuper');
-
-    const tabRandom = document.getElementById('tabRandom');
-    const tabDiceware = document.getElementById('tabDiceware');
-    const panelRandom = document.getElementById('panelRandom');
-    const panelDiceware = document.getElementById('panelDiceware');
-    
-    const rangeLength = document.getElementById('rangeLength');
-    const lblLength = document.getElementById('lblLength');
-    const rangeWords = document.getElementById('rangeWords');
-    const lblWords = document.getElementById('lblWords');
-
-    const chkUpper = document.getElementById('chkUpper');
-    const chkLower = document.getElementById('chkLower');
-    const chkNum = document.getElementById('chkNum');
-    const chkSym = document.getElementById('chkSym');
-    const chkAmbiguous = document.getElementById('chkAmbiguous');
-    const btnGenerate = document.getElementById('btnGenerate');
-    const toast = document.getElementById('toast');
-
-    let currentMode = 'random'; // 'random' yoki 'diceware'
-
-    // Belgilar Toplami
-    const CHAR_SETS = {
-        upper: 'ABCDEFGHIJKLMNOPQRSTUVWXYZ',
-        lower: 'abcdefghijklmnopqrstuvwxyz',
-        num: '0123456789',
-        sym: '!@#$%^&*()_+-=[]{}|;:,.<>?'
-    };
-    const AMBIGUOUS = /[l1O0I]/g;
-
-    // PATTERN TEKSHIRISH
-    function detectPatterns(pwd) {
-        const warnings = [];
-        if (!pwd) return warnings;
-
-        // Qaytariluvchi belgilar (aaa, 111)
-        if (/(.)\1\1/.test(pwd)) {
-            warnings.push("Ketma-ket 3+ bir xil belgi");
-        }
-        // Ketma-ket raqamlar yoki harflar (1234, abcd)
-        if (/(012|123|234|345|456|567|678|789|abc|bcd|cde|def)/i.test(pwd)) {
-            warnings.push("Oddiy ketma-ketlik mavjud (123/abc)");
-        }
-        // Klaviatura ketma-ketligi
-        if (/(qwerty|asdf|zxcv)/i.test(pwd)) {
-            warnings.push("Klaviatura tartibi (qwerty)");
-        }
-        // L33tspeak (P@ssw0rd)
-        if (/[a-z]+[@013$][a-z]+/i.test(pwd)) {
-            warnings.push("Oson taxmin qilinadigan almashtirishlar");
+            // Daraxtni chizish
+            renderTree(root);
         }
 
-        return warnings;
-    }
+        function renderTree(root) {
+            const svg = document.getElementById('treeSvg');
+            svg.innerHTML = '';
 
-    // TAHLIL ENGINE
-    function analyze(pwd) {
-        if (!pwd) {
-            resetStats();
-            return;
-        }
+            if (!root) return;
 
-        let N = 0;
-        let hasLower = /[a-z]/.test(pwd);
-        let hasUpper = /[A-Z]/.test(pwd);
-        let hasNum = /[0-9]/.test(pwd);
-        let hasSym = /[^a-zA-Z0-9]/.test(pwd);
+            const svgWidth = svg.clientWidth || 600;
+            const svgHeight = svg.clientHeight || 480;
 
-        if (hasLower) N += 26;
-        if (hasUpper) N += 26;
-        if (hasNum) N += 10;
-        if (hasSym) N += 32;
+            // Tugunlar pozitsiyasini hisoblash
+            function calculatePositions(node, depth = 0, leftBoundary = 0, rightBoundary = svgWidth) {
+                if (!node) return [];
 
-        const L = pwd.length;
-        
-        // Entropiya: E = L * log2(N)
-        let entropy = N > 0 ? L * Math.log2(N) : 0;
+                const x = (leftBoundary + rightBoundary) / 2;
+                const y = 50 + depth * 65;
 
-        // Pattern bo'lsa entropiyadan ozgina jarima ayiramiz
-        const warnings = detectPatterns(pwd);
-        if (warnings.length > 0) {
-            entropy = Math.max(0, entropy - (warnings.length * 8));
-        }
+                node.x = x;
+                node.y = y;
 
-        // Kombinatsiyalar N^L
-        const combinations = N > 0 ? Math.pow(N, L) : 0;
+                let nodes = [{ node, x, y, depth }];
 
-        // UI Yangilash
-        renderResults(N, combinations, entropy, warnings);
-    }
+                if (node.left) {
+                    nodes = nodes.concat(calculatePositions(node.left, depth + 1, leftBoundary, x));
+                }
+                if (node.right) {
+                    nodes = nodes.concat(calculatePositions(node.right, depth + 1, x, rightBoundary));
+                }
 
-    function renderResults(N, combinations, entropy, warnings) {
-        statN.innerText = `${N} belgi`;
-        
-        if (combinations > 1e15) {
-            statCombinations.innerText = combinations.toExponential(2);
-        } else {
-            statCombinations.innerText = Math.round(combinations).toLocaleString();
-        }
-
-        entropyVal.innerText = `${entropy.toFixed(1)} bit`;
-
-        // Pattern ogohlantirishlari
-        warningsBox.innerHTML = '';
-        warnings.forEach(w => {
-            const chip = document.createElement('div');
-            chip.className = 'warning-chip';
-            chip.innerHTML = `<i class="fa-solid fa-triangle-exclamation"></i> ${w}`;
-            warningsBox.appendChild(chip);
-        });
-
-        // Vaqtlarni hisoblash
-        // Tezliklar: Online=100/s, PC=1M/s, GPU=100B/s, Super=100T/s
-        const totalAttempts = combinations / 2; // O'rtacha yarmi
-        timeOnline.innerText = formatTime(totalAttempts / 100);
-        timePC.innerText = formatTime(totalAttempts / 1e6);
-        timeGPU.innerText = formatTime(totalAttempts / 1e11);
-        timeSuper.innerText = formatTime(totalAttempts / 1e14);
-
-        // Darajalar
-        let level = { percent: 0, color: '#64748b', text: 'Kutilmoqda' };
-
-        if (entropy > 0 && entropy < 28) {
-            level = { percent: 20, color: 'var(--danger)', text: 'O`ta Zaif' };
-        } else if (entropy >= 28 && entropy < 40) {
-            level = { percent: 40, color: 'var(--warning)', text: 'Zaif' };
-        } else if (entropy >= 40 && entropy < 60) {
-            level = { percent: 60, color: '#eab308', text: 'O`rtacha' };
-        } else if (entropy >= 60 && entropy < 90) {
-            level = { percent: 80, color: 'var(--good)', text: 'Mustahkam' };
-        } else if (entropy >= 90) {
-            level = { percent: 100, color: 'var(--bulletproof)', text: 'Buzilmas' };
-        }
-
-        meterFill.style.width = `${level.percent}%`;
-        meterFill.style.backgroundColor = level.color;
-        statusTag.style.backgroundColor = `${level.color}22`;
-        statusTag.style.color = level.color;
-        statusTag.innerText = level.text;
-    }
-
-    function formatTime(seconds) {
-        if (!isFinite(seconds) || seconds < 0) return "0s";
-        if (seconds < 1) return "< 1 soniya";
-        if (seconds < 60) return `${Math.floor(seconds)} soniya`;
-        
-        const min = seconds / 60;
-        if (min < 60) return `${Math.floor(min)} daqiqa`;
-        
-        const hrs = min / 60;
-        if (hrs < 24) return `${Math.floor(hrs)} soat`;
-        
-        const days = hrs / 24;
-        if (days < 365) return `${Math.floor(days)} kun`;
-        
-        const yrs = days / 365;
-        if (yrs < 1000) return `${Math.floor(yrs)} yil`;
-        if (yrs < 1e6) return `${(yrs / 1000).toFixed(1)} ming yil`;
-        if (yrs < 1e9) return `${(yrs / 1e6).toFixed(1)} mln yil`;
-        return `${(yrs / 1e9).toFixed(1)} mldr yil`;
-    }
-
-    function resetStats() {
-        meterFill.style.width = '0%';
-        statusTag.innerText = 'Kutilmoqda';
-        statusTag.style.backgroundColor = 'transparent';
-        statusTag.style.color = 'var(--text-muted)';
-        entropyVal.innerText = '0.0 bit';
-        statN.innerText = '0 belgi';
-        statCombinations.innerText = '0';
-        warningsBox.innerHTML = '';
-        timeOnline.innerText = '0s';
-        timePC.innerText = '0s';
-        timeGPU.innerText = '0s';
-        timeSuper.innerText = '0s';
-    }
-
-    // GENERATOR
-    function generate() {
-        let result = '';
-
-        if (currentMode === 'random') {
-            let pool = '';
-            if (chkUpper.checked) pool += CHAR_SETS.upper;
-            if (chkLower.checked) pool += CHAR_SETS.lower;
-            if (chkNum.checked) pool += CHAR_SETS.num;
-            if (chkSym.checked) pool += CHAR_SETS.sym;
-
-            if (chkAmbiguous.checked) {
-                pool = pool.replace(AMBIGUOUS, '');
+                return nodes;
             }
 
-            if (!pool) {
-                showToast("Kamida bitta belgi turini tanlang!", true);
-                return;
+            const allNodes = calculatePositions(root);
+
+            // Chiziqlarni (Edges) chizish
+            function drawEdges(node) {
+                if (!node) return;
+
+                if (node.left) {
+                    createLine(node.x, node.y, node.left.x, node.left.y, "0");
+                    drawEdges(node.left);
+                }
+                if (node.right) {
+                    createLine(node.x, node.y, node.right.x, node.right.y, "1");
+                    drawEdges(node.right);
+                }
             }
 
-            const len = parseInt(rangeLength.value);
-            const array = new Uint32Array(len);
-            window.crypto.getRandomValues(array);
+            function createLine(x1, y1, x2, y2, label) {
+                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+                line.setAttribute("x1", x1);
+                line.setAttribute("y1", y1);
+                line.setAttribute("x2", x2);
+                line.setAttribute("y2", y2);
+                line.setAttribute("class", "link");
+                svg.appendChild(line);
 
-            for (let i = 0; i < len; i++) {
-                result += pool[array[i] % pool.length];
+                // Bit label (0 yoki 1)
+                const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                text.setAttribute("x", (x1 + x2) / 2 + (label === "0" ? -10 : 10));
+                text.setAttribute("y", (y1 + y2) / 2);
+                text.setAttribute("class", "link-label");
+                text.textContent = label;
+                svg.appendChild(text);
             }
-        } else {
-            // Diceware
-            const wordCount = parseInt(rangeWords.value);
-            const array = new Uint32Array(wordCount);
-            window.crypto.getRandomValues(array);
 
-            const words = [];
-            for (let i = 0; i < wordCount; i++) {
-                words.push(DICE_WORDS[array[i] % DICE_WORDS.length]);
-            }
-            // Tasodifiy ajratuvchi va raqam
-            const num = (array[0] % 90) + 10;
-            result = words.join('-') + '-' + num;
+            drawEdges(root);
+
+            // Tugunlarni (Nodes) chizish
+            allNodes.forEach(({ node, x, y }) => {
+                const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
+                const isLeaf = node.char !== null;
+                g.setAttribute("class", `node ${isLeaf ? 'leaf' : ''}`);
+
+                const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
+                circle.setAttribute("cx", x);
+                circle.setAttribute("cy", y);
+                circle.setAttribute("r", isLeaf ? 18 : 16);
+
+                const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+                text.setAttribute("x", x);
+                text.setAttribute("y", y);
+                
+                const labelChar = node.char === ' ' ? '␣' : node.char;
+                text.textContent = isLeaf ? `${labelChar}:${node.freq}` : node.freq;
+
+                g.appendChild(circle);
+                g.appendChild(text);
+                svg.appendChild(g);
+            });
         }
 
-        inputPassword.value = result;
-        analyze(result);
-    }
+        function loadSampleText() {
+            document.getElementById('inputText').value = "Muhammadiv Diyorbek va Mirzaliyev Oyatullo - Xaffman Algoritmi Kurs Ishi";
+            processHuffman();
+        }
 
-    function showToast(msg = "Nusxalandi!", isError = false) {
-        toast.style.background = isError ? 'var(--danger)' : 'var(--good)';
-        toast.style.color = isError ? '#fff' : '#000';
-        toast.innerHTML = isError 
-            ? `<i class="fa-solid fa-circle-exclamation"></i> ${msg}`
-            : `<i class="fa-solid fa-circle-check"></i> ${msg}`;
-        toast.classList.add('show');
-        setTimeout(() => toast.classList.remove('show'), 2000);
-    }
-
-    // EVENT LISTENERS
-    inputPassword.addEventListener('input', (e) => analyze(e.target.value));
-
-    btnToggleVis.addEventListener('click', () => {
-        const type = inputPassword.type === 'password' ? 'text' : 'password';
-        inputPassword.type = type;
-        btnToggleVis.innerHTML = type === 'password' 
-            ? '<i class="fa-regular fa-eye"></i>' 
-            : '<i class="fa-regular fa-eye-slash"></i>';
-    });
-
-    btnCopy.addEventListener('click', () => {
-        if (!inputPassword.value) return;
-        navigator.clipboard.writeText(inputPassword.value);
-        showToast("Parol clipboard'ga nusxalandi!");
-    });
-
-    // Tab almashishi
-    tabRandom.addEventListener('click', () => {
-        currentMode = 'random';
-        tabRandom.classList.add('active');
-        tabDiceware.classList.remove('active');
-        panelRandom.style.display = 'block';
-        panelDiceware.style.display = 'none';
-        generate();
-    });
-
-    tabDiceware.addEventListener('click', () => {
-        currentMode = 'diceware';
-        tabDiceware.classList.add('active');
-        tabRandom.classList.remove('active');
-        panelDiceware.style.display = 'block';
-        panelRandom.style.display = 'none';
-        generate();
-    });
-
-    rangeLength.addEventListener('input', (e) => {
-        lblLength.innerText = e.target.value;
-        generate();
-    });
-
-    rangeWords.addEventListener('input', (e) => {
-        lblWords.innerText = e.target.value;
-        generate();
-    });
-
-    [chkUpper, chkLower, chkNum, chkSym, chkAmbiguous].forEach(chk => {
-        chk.addEventListener('change', generate);
-    });
-
-    btnGenerate.addEventListener('click', generate);
-
-    // Boshlang'ich ishga tushirish
-    generate();
-</script>
-
+        // Boshlang'ich ishga tushirish
+        window.onload = function() {
+            processHuffman();
+        };
+    </script>
 </body>
-</html>
+</html>s
