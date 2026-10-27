@@ -6,7 +6,7 @@
     <title>Xaffman Kodlash va Siqish Laboratoriyasi</title>
     <style>
         :root {
-            --bg-primary: #090d16;
+            --bg-primary: #0b0f19;
             --bg-secondary: #111827;
             --bg-card: #1f2937;
             --text-main: #f3f4f6;
@@ -28,29 +28,26 @@
         body {
             background-color: var(--bg-primary);
             color: var(--text-main);
-            padding: 20px;
-            line-height: 1.6;
+            padding: 16px;
+            line-height: 1.5;
         }
 
-        /* Yuqori Sarlavha Oynasi */
-        .window-header {
+        .header {
             background: linear-gradient(135deg, #1f2937, #0f172a);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            padding: 20px 24px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+            padding: 16px 20px;
+            margin-bottom: 16px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 12px;
         }
 
         .header-title h1 {
-            font-size: 22px;
+            font-size: 20px;
             color: #60a5fa;
-            margin-bottom: 4px;
         }
 
         .header-title p {
@@ -61,427 +58,346 @@
         .authors-box {
             background-color: var(--bg-secondary);
             border: 1px solid var(--accent-purple);
-            padding: 10px 16px;
+            padding: 8px 14px;
             border-radius: 8px;
         }
 
         .authors-box h3 {
             font-size: 10px;
-            text-transform: uppercase;
-            letter-spacing: 1px;
             color: var(--accent-purple);
-            margin-bottom: 2px;
+            text-transform: uppercase;
         }
 
         .authors-box p {
             font-weight: 600;
             font-size: 13px;
-            color: #fff;
         }
 
-        /* Ovozli yordamchi tugmasi uchun panel */
-        .voice-control-bar {
-            background-color: var(--bg-secondary);
+        .voice-bar {
+            background: rgba(16, 185, 129, 0.1);
             border: 1px solid var(--accent-green);
             border-radius: 10px;
-            padding: 12px 20px;
-            margin-bottom: 20px;
+            padding: 12px;
+            margin-bottom: 16px;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+
+        .voice-controls {
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 10px;
         }
 
-        .voice-control-bar span {
+        .subtitle-box {
+            background-color: var(--bg-primary);
+            border: 1px dashed var(--accent-green);
+            border-radius: 6px;
+            padding: 8px 12px;
             font-size: 13px;
             color: var(--accent-green);
-            font-weight: 600;
+            min-height: 40px;
         }
 
-        /* Ko'p oynali Grid tartibi */
         .multi-window-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
+            gap: 16px;
         }
 
-        @media (max-width: 1024px) {
+        @media (max-width: 768px) {
             .multi-window-grid {
                 grid-template-columns: 1fr;
             }
         }
 
-        /* Oyna (Window) dizayni */
         .window-pane {
             background-color: var(--bg-secondary);
             border: 1px solid var(--border-color);
             border-radius: 12px;
-            display: flex;
-            flex-direction: column;
             overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+            cursor: pointer;
+            transition: transform 0.2s, border-color 0.2s;
+        }
+
+        .window-pane:hover {
+            border-color: var(--accent-blue);
+            transform: translateY(-2px);
         }
 
         .window-titlebar {
             background-color: var(--bg-card);
-            padding: 10px 16px;
-            font-size: 14px;
+            padding: 10px 14px;
+            font-size: 13px;
             font-weight: 600;
             color: #38bdf8;
             border-bottom: 1px solid var(--border-color);
             display: flex;
-            align-items: center;
             justify-content: space-between;
+            align-items: center;
         }
 
         .window-body {
-            padding: 16px;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
+            padding: 14px;
         }
 
         textarea {
             width: 100%;
-            height: 90px;
+            height: 80px;
             background-color: var(--bg-primary);
             border: 1px solid var(--border-color);
-            border-radius: 8px;
+            border-radius: 6px;
             color: var(--text-main);
-            padding: 10px;
-            font-size: 13px;
-            resize: vertical;
-            outline: none;
-        }
-
-        textarea:focus {
-            border-color: var(--accent-blue);
+            padding: 8px;
+            font-size: 12px;
+            resize: none;
         }
 
         .btn-group {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             flex-wrap: wrap;
+            margin-top: 8px;
         }
 
         button {
             background-color: var(--accent-blue);
             color: white;
             border: none;
-            padding: 8px 14px;
+            padding: 8px 12px;
             border-radius: 6px;
             cursor: pointer;
             font-weight: 600;
             font-size: 12px;
-            transition: all 0.2s;
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
         }
 
-        button:hover {
-            opacity: 0.9;
-            transform: translateY(-1px);
-        }
+        button.btn-success { background-color: var(--accent-green); }
+        button.btn-warning { background-color: var(--accent-orange); }
+        button.btn-secondary { background-color: var(--bg-card); border: 1px solid var(--border-color); }
+        button.btn-danger { background-color: #ef4444; }
 
-        button.btn-secondary {
-            background-color: var(--bg-card);
-            color: var(--text-main);
-            border: 1px solid var(--border-color);
-        }
-
-        button.btn-success {
-            background-color: var(--accent-green);
-        }
-
-        button.btn-warning {
-            background-color: var(--accent-orange);
-        }
-
-        button.btn-danger {
-            background-color: #ef4444;
-        }
-
-        /* Analitika metriclar */
         .metrics-grid {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 8px;
-        }
-
-        @media (max-width: 768px) {
-            .metrics-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
+            grid-template-columns: repeat(2, 1fr);
+            gap: 6px;
         }
 
         .metric-box {
             background-color: var(--bg-primary);
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            padding: 8px;
+            padding: 6px;
             text-align: center;
         }
 
-        .metric-box label {
-            display: block;
-            font-size: 9px;
-            color: var(--text-muted);
-            text-transform: uppercase;
-            margin-bottom: 2px;
-        }
+        .metric-box label { display: block; font-size: 9px; color: var(--text-muted); }
+        .metric-box span { font-size: 13px; font-weight: 700; color: var(--accent-green); }
 
-        .metric-box span {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--accent-green);
-        }
-
-        /* Jadval oynasi */
         .table-container {
             overflow-x: auto;
-            max-height: 180px;
-            overflow-y: auto;
+            max-height: 140px;
             border: 1px solid var(--border-color);
             border-radius: 6px;
+            margin-top: 8px;
         }
 
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            text-align: left;
-            font-size: 12px;
-        }
+        table { width: 100%; border-collapse: collapse; font-size: 11px; }
+        th, td { padding: 6px 8px; border-bottom: 1px solid var(--border-color); }
+        th { background-color: var(--bg-card); color: var(--text-muted); }
 
-        th, td {
-            padding: 7px 10px;
-            border-bottom: 1px solid var(--border-color);
-        }
-
-        th {
-            background-color: var(--bg-card);
-            color: var(--text-muted);
-            position: sticky;
-            top: 0;
-            z-index: 5;
-        }
-
-        tr:hover {
-            background-color: rgba(255, 255, 255, 0.02);
-        }
-
-        /* Daraxt vizualizatsiya oynasi */
         .tree-container {
             width: 100%;
-            height: 380px;
+            height: 200px;
             background-color: var(--bg-primary);
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            overflow: hidden;
-            position: relative;
         }
 
-        svg {
-            width: 100%;
-            height: 100%;
-        }
-
-        .node circle {
-            fill: var(--bg-card);
-            stroke: var(--accent-blue);
-            stroke-width: 2px;
-        }
-
-        .node.leaf circle {
-            fill: #064e3b;
-            stroke: var(--accent-green);
-        }
-
-        .node text {
-            fill: var(--text-main);
-            font-size: 10px;
-            font-weight: 600;
-            text-anchor: middle;
-            dominant-baseline: central;
-        }
-
-        .link {
-            fill: none;
-            stroke: var(--border-color);
-            stroke-width: 2px;
-        }
-
-        .link-label {
-            fill: var(--accent-orange);
-            font-size: 10px;
-            font-weight: bold;
-            text-anchor: middle;
-        }
-
-        .code-output-wrapper {
-            position: relative;
-        }
+        svg { width: 100%; height: 100%; }
+        .node circle { fill: var(--bg-card); stroke: var(--accent-blue); stroke-width: 2px; }
+        .node.leaf circle { fill: #064e3b; stroke: var(--accent-green); }
+        .node text { fill: var(--text-main); font-size: 10px; font-weight: 600; text-anchor: middle; dominant-baseline: central; }
+        .link { fill: none; stroke: var(--border-color); stroke-width: 2px; }
+        .link-label { fill: var(--accent-orange); font-size: 10px; font-weight: bold; text-anchor: middle; }
 
         .code-output {
             background-color: var(--bg-primary);
             border: 1px solid var(--border-color);
             border-radius: 6px;
-            padding: 10px;
+            padding: 8px;
             font-family: monospace;
             word-break: break-all;
-            max-height: 75px;
+            max-height: 60px;
             overflow-y: auto;
             color: var(--accent-orange);
             font-size: 11px;
         }
 
-        .copy-btn {
-            position: absolute;
-            top: 4px;
-            right: 4px;
-            background: var(--bg-card);
-            border: 1px solid var(--border-color);
-            color: var(--text-muted);
-            font-size: 9px;
-            padding: 3px 6px;
-            border-radius: 4px;
-            cursor: pointer;
-        }
-
-        .copy-btn:hover {
-            color: #fff;
-            background: var(--accent-blue);
-        }
-
-        .file-input-wrapper {
+        /* Fullscreen Modal Oyna */
+        .modal-overlay {
             display: none;
+            position: fixed;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(5px);
+            z-index: 1000;
+            padding: 20px;
+            overflow-y: auto;
+        }
+
+        .modal-content {
+            background-color: var(--bg-secondary);
+            border: 1px solid var(--accent-blue);
+            border-radius: 12px;
+            max-width: 900px;
+            margin: 20px auto;
+            padding: 20px;
+            position: relative;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 12px; right: 12px;
+            background: #ef4444;
+            color: white;
+            border: none;
+            padding: 6px 12px;
+            border-radius: 6px;
+            cursor: pointer;
         }
     </style>
 </head>
 <body>
 
-    <!-- 1. Sarlavha Oynasi -->
-    <div class="window-header">
+    <div class="header">
         <div class="header-title">
-            <h1>Xaffman Kodlash va Ma'lumotlarni Siqish Laboratoriyasi</h1>
-            <p>Ierarxik Daraxtlar va Optimal Kodlash Nazariyasi Bo'yicha Kurs Ishi Loyihasi</p>
+            <h1>Xaffman Kodlash va Siqish Laboratoriyasi</h1>
+            <p>Ierarxik Daraxtlar va Optimal Kodlash Nazariyasi</p>
         </div>
         <div class="authors-box">
             <h3>Bajaruvchilar:</h3>
-            <p>Muhammadov Diyorbek & Mirzaliyev Oyatillo</p>
+            <p>Muhammadiv Diyorbek & Mirzaliyev Oyatullo</p>
         </div>
     </div>
 
-    <!-- Ovozli Tushuntirish Paneli -->
-    <div class="voice-control-bar">
-        <span>🤖 AI Ovozli Yordamchi: Loyihani o'zbek tilida tinglash uchun tugmani bosing</span>
-        <div class="btn-group">
-            <button class="btn-success" onclick="playVoiceExplanation()">🔊 Ovozli Tushuntirishni Boshlash</button>
-            <button class="btn-danger" onclick="stopVoiceExplanation()">⏹ To'xtatish</button>
+    <!-- Telefon va Kompyuter uchun universal Ovozli Yordamchi -->
+    <div class="voice-bar">
+        <div class="voice-controls">
+            <span style="font-size: 13px; font-weight: 600;">🤖 AI Ovozli va Subtitr Yordamchisi:</span>
+            <div class="btn-group">
+                <button class="btn-success" onclick="playVoiceExplanation()">🔊 Tinglash / Boshlash</button>
+                <button class="btn-danger" onclick="stopVoiceExplanation()">⏹ To'xtatish</button>
+            </div>
         </div>
+        <div class="subtitle-box" id="subtitleBox">Tushuntirishni eshitish va o'qish uchun "Tinglash" tugmasini bosing...</div>
     </div>
 
-    <!-- Ko'p Oynali Grid Tizimi -->
+    <!-- Oynalar Gridi (Ustiga bosganda kattalashadi) -->
     <div class="multi-window-grid">
         
-        <!-- OYNA 1: Ma'lumotlarni Kiritish va Boshqarish -->
-        <div class="window-pane">
+        <div class="window-pane" onclick="openModal('modalInput')">
             <div class="window-titlebar">
-                <span>📂 1-Oyna: Ma'lumotlarni Kiritish va Boshqarish</span>
-                <button class="btn-secondary" style="padding: 2px 8px; font-size: 10px;" onclick="document.getElementById('fileInput').click()">Fayldan O'qish</button>
-                <input type="file" id="fileInput" class="file-input-wrapper" accept=".txt" onchange="handleFileUpload(event)">
+                <span>📂 1-Oyna: Kiritish (Kengaytirish ⛶)</span>
             </div>
             <div class="window-body">
-                <textarea id="inputText" placeholder="Kodlash uchun matn kiriting...">Xaffman kodlash algoritmi ierarxik daraxtlar va optimal siqish nazariyasiga tayanadi.</textarea>
-                <div class="btn-group">
-                    <button onclick="processHuffman()">🚀 Daraxt Qurish & Siqish</button>
-                    <button class="btn-secondary" onclick="loadSampleText()">✨ Namuna Matn</button>
-                    <button class="btn-warning" onclick="exportReport()">📥 Hisobotni Yuklab Olish</button>
+                <textarea id="inputText" onclick="event.stopPropagation()" placeholder="Matn kiriting...">Xaffman kodlash algoritmi ierarxik daraxtlar va optimal siqish nazariyasiga tayanadi.</textarea>
+                <div class="btn-group" onclick="event.stopPropagation()">
+                    <button onclick="processHuffman()">🚀 Daraxt Qurish</button>
+                    <button class="btn-secondary" onclick="document.getElementById('fileInput').click()">📁 Fayl</button>
+                    <input type="file" id="fileInput" style="display:none;" accept=".txt" onchange="handleFileUpload(event)">
                 </div>
             </div>
         </div>
 
-        <!-- OYNA 2: Axborot-Nazariy Analitika va Chastotalar -->
-        <div class="window-pane">
+        <div class="window-pane" onclick="openModal('modalAnalytics')">
             <div class="window-titlebar">
-                <span>📊 2-Oyna: Axborot-Nazariy Analitika</span>
+                <span>📊 2-Oyna: Analitika (Kengaytirish ⛶)</span>
             </div>
             <div class="window-body">
                 <div class="metrics-grid">
-                    <div class="metric-box">
-                        <label>Asl O'lcham</label>
-                        <span id="originalSize">0 bit</span>
-                    </div>
-                    <div class="metric-box">
-                        <label>Siqilgan O'lcham</label>
-                        <span id="compressedSize">0 bit</span>
-                    </div>
-                    <div class="metric-box">
-                        <label>Siqish Nisbati</label>
-                        <span id="compressionRatio">0%</span>
-                    </div>
-                    <div class="metric-box">
-                        <label>Entropiya H(X)</label>
-                        <span id="entropyValue">0</span>
-                    </div>
-                </div>
-
-                <div class="table-container">
-                    <table>
-                        <thead>
-                            <tr>
-                                <th>Belgi</th>
-                                <th>Chastota</th>
-                                <th>Ehtimollik</th>
-                                <th>Xaffman Kodu</th>
-                                <th>Uzunlik</th>
-                            </tr>
-                        </thead>
-                        <tbody id="freqTableBody">
-                            <!-- JS orqali to'ldiriladi -->
-                        </tbody>
-                    </table>
+                    <div class="metric-box"><label>Asl</label><span id="originalSize">0 bit</span></div>
+                    <div class="metric-box"><label>Siqilgan</label><span id="compressedSize">0 bit</span></div>
+                    <div class="metric-box"><label>Nisbat</label><span id="compressionRatio">0%</span></div>
+                    <div class="metric-box"><label>Entropiya</label><span id="entropyValue">0</span></div>
                 </div>
             </div>
         </div>
 
-        <!-- OYNA 3: Interaktiv Xaffman Ierarxik Daraxti -->
-        <div class="window-pane">
+        <div class="window-pane" onclick="openModal('modalTree')">
             <div class="window-titlebar">
-                <span>🌳 3-Oyna: Interaktiv Xaffman Ierarxik Daraxti</span>
+                <span>🌳 3-Oyna: Xaffman Daraxti (Kengaytirish ⛶)</span>
             </div>
             <div class="window-body">
-                <p style="font-size: 11px; color: var(--text-muted);">
-                    Yashil tugunlar — matndagi belgilar (barglar), kulrang tugunlar chastotalar yig'indisini bildiruvchi ota-tugunlar.
-                </p>
                 <div class="tree-container">
                     <svg id="treeSvg"></svg>
                 </div>
             </div>
         </div>
 
-        <!-- OYNA 4: Binar Stream va Dekodlash Tekshiruvi -->
-        <div class="window-pane">
+        <div class="window-pane" onclick="openModal('modalStream')">
             <div class="window-titlebar">
-                <span>⚡ 4-Oyna: Binar Stream va Dekodlash Tekshiruvi</span>
+                <span>⚡ 4-Oyna: Binar Stream & Dekodlash (Kengaytirish ⛶)</span>
             </div>
             <div class="window-body">
-                <label style="font-size: 10px; color: var(--text-muted); text-transform: uppercase;">SIQILGAN BITSTREAM (0 va 1 lar):</label>
-                <div class="code-output-wrapper">
-                    <div class="code-output" id="binaryStream">-</div>
-                    <button class="copy-btn" onclick="copyToClipboard('binaryStream')">Nusxa</button>
-                </div>
-
-                <label style="font-size: 10px; color: var(--text-muted); text-transform: uppercase; margin-top: 4px;">QAYTA TIKLANGAN MATN (DEKODLANGAN):</label>
-                <div class="code-output-wrapper">
-                    <div class="code-output" id="decodedText" style="color: var(--accent-green);">-</div>
-                    <button class="copy-btn" onclick="copyToClipboard('decodedText')">Nusxa</button>
-                </div>
+                <label style="font-size: 9px; color: var(--text-muted);">BITSTREAM:</label>
+                <div class="code-output" id="binaryStream">-</div>
             </div>
         </div>
 
+    </div>
+
+    <!-- MODAL OYNALAR -->
+    <div id="modalInput" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modalInput')">✕ Yopish</button>
+            <h2 style="color: #38bdf8; margin-bottom: 12px;">📂 1-Oyna: Ma'lumotlarni Kiritish va Boshqaruv</h2>
+            <textarea id="modalInputText" style="height: 150px; font-size: 14px;"></textarea>
+            <div class="btn-group" style="margin-top: 14px;">
+                <button onclick="syncInputAndProcess()">🚀 Qayta Hisoblash & Daraxt Qurish</button>
+                <button class="btn-secondary" onclick="loadSampleText()">✨ Namuna Matn Yuklash</button>
+                <button class="btn-warning" onclick="exportReport()">📥 Hisobotni Yuklab Olish (.txt)</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalAnalytics" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modalAnalytics')">✕ Yopish</button>
+            <h2 style="color: #38bdf8; margin-bottom: 12px;">📊 2-Oyna: Axborot-Nazariy Analitika va Jadval</h2>
+            <div class="table-container" style="max-height: 400px;">
+                <table>
+                    <thead>
+                        <tr><th>Belgi</th><th>Chastota</th><th>Ehtimollik</th><th>Xaffman Kodu</th><th>Uzunlik</th></tr>
+                    </thead>
+                    <tbody id="modalFreqTableBody"></tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalTree" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modalTree')">✕ Yopish</button>
+            <h2 style="color: #38bdf8; margin-bottom: 12px;">🌳 3-Oyna: Interaktiv Xaffman Ierarxik Daraxti</h2>
+            <div class="tree-container" style="height: 500px;">
+                <svg id="modalTreeSvg"></svg>
+            </div>
+        </div>
+    </div>
+
+    <div id="modalStream" class="modal-overlay">
+        <div class="modal-content">
+            <button class="modal-close" onclick="closeModal('modalStream')">✕ Yopish</button>
+            <h2 style="color: #38bdf8; margin-bottom: 12px;">⚡ 4-Oyna: Bitstream va Qayta Tiklash</h2>
+            <label style="color: var(--text-muted); font-size: 12px;">SIQILGAN KOD (0 VA 1 LAR):</label>
+            <div class="code-output" id="modalBinaryStream" style="max-height: 150px; font-size: 13px;">-</div>
+            <br>
+            <label style="color: var(--text-muted); font-size: 12px;">DEKODLANGAN ASL MATN:</label>
+            <div class="code-output" id="modalDecodedText" style="color: var(--accent-green); max-height: 150px; font-size: 13px;">-</div>
+        </div>
     </div>
 
     <script>
@@ -494,77 +410,41 @@
             }
         }
 
-        let globalCurrentData = {
-            text: "",
-            codes: {},
-            freqMap: {},
-            binaryStream: "",
-            decodedText: "",
-            compressedBits: 0,
-            originalBits: 0
-        };
+        let globalData = {};
+        let speechTimer = null;
 
         function buildHuffmanTree(text) {
             if (!text) return null;
-
             const freqMap = {};
-            for (let char of text) {
-                freqMap[char] = (freqMap[char] || 0) + 1;
-            }
+            for (let char of text) freqMap[char] = (freqMap[char] || 0) + 1;
 
             const nodes = Object.keys(freqMap).map(char => new HuffmanNode(char, freqMap[char]));
-
-            if (nodes.length === 1) {
-                return { root: new HuffmanNode(null, nodes[0].freq, nodes[0]), freqMap };
-            }
+            if (nodes.length === 1) return { root: new HuffmanNode(null, nodes[0].freq, nodes[0]), freqMap };
 
             while (nodes.length > 1) {
                 nodes.sort((a, b) => a.freq - b.freq);
                 const left = nodes.shift();
                 const right = nodes.shift();
-
-                const parent = new HuffmanNode(null, left.freq + right.freq, left, right);
-                nodes.push(parent);
+                nodes.push(new HuffmanNode(null, left.freq + right.freq, left, right));
             }
-
             return { root: nodes[0], freqMap };
         }
 
         function generateCodes(node, code = "", codes = {}) {
             if (!node) return codes;
-
-            if (node.char !== null) {
-                codes[node.char] = code || "0";
-            }
-
+            if (node.char !== null) codes[node.char] = code || "0";
             generateCodes(node.left, code + "0", codes);
             generateCodes(node.right, code + "1", codes);
-
             return codes;
-        }
-
-        function calculateEntropy(freqMap, totalChars) {
-            let entropy = 0;
-            for (let char in freqMap) {
-                let p = freqMap[char] / totalChars;
-                entropy -= p * Math.log2(p);
-            }
-            return entropy.toFixed(3);
         }
 
         function decodeStream(root, binaryStr) {
             if (!root) return "";
-            let result = "";
-            let curr = root;
-
-            if (!root.left && !root.right && root.char) {
-                return binaryStr.split('').map(() => root.char).join('');
-            }
-
+            let result = "", curr = root;
+            if (!root.left && !root.right && root.char) return binaryStr.split('').map(() => root.char).join('');
             for (let bit of binaryStr) {
                 if (bit === '0') curr = curr.left;
                 else if (bit === '1') curr = curr.right;
-
                 if (curr && curr.char !== null) {
                     result += curr.char;
                     curr = root;
@@ -575,17 +455,13 @@
 
         function processHuffman() {
             const text = document.getElementById('inputText').value;
-            if (!text) {
-                alert("Iltimos, kodlash uchun matn kiriting!");
-                return;
-            }
+            if (!text) return;
 
             const treeData = buildHuffmanTree(text);
             if (!treeData) return;
 
             const { root, freqMap } = treeData;
             const codes = generateCodes(root);
-
             const totalChars = text.length;
             const originalBits = totalChars * 8;
             let compressedBits = 0;
@@ -596,129 +472,85 @@
                 const prob = (count / totalChars).toFixed(3);
                 const code = codes[char];
                 compressedBits += count * code.length;
-
-                const displayChar = char === ' ' ? '␣ (bo\'shliq)' : (char === '\n' ? '↵ (yangi qator)' : char);
-                tableHtml += `
-                    <tr>
-                        <td style="font-weight: bold; color: #60a5fa;">${displayChar}</td>
-                        <td>${count}</td>
-                        <td>${prob}</td>
-                        <td style="font-family: monospace; color: var(--accent-orange);">${code}</td>
-                        <td>${code.length} bit</td>
-                    </tr>
-                `;
+                const displayChar = char === ' ' ? '␣' : char;
+                tableHtml += `<tr><td>${displayChar}</td><td>${count}</td><td>${prob}</td><td>${code}</td><td>${code.length}</td></tr>`;
             }
 
             let encodedStream = "";
-            for (let char of text) {
-                encodedStream += codes[char];
-            }
-
+            for (let char of text) encodedStream += codes[char];
             const decoded = decodeStream(root, encodedStream);
 
-            globalCurrentData = {
-                text, codes, freqMap, binaryStream: encodedStream, decodedText: decoded, compressedBits, originalBits
-            };
+            globalData = { text, codes, freqMap, binaryStream: encodedStream, decodedText: decoded, compressedBits, originalBits };
 
-            document.getElementById('freqTableBody').innerHTML = tableHtml;
             document.getElementById('originalSize').innerText = originalBits + " bit";
             document.getElementById('compressedSize').innerText = compressedBits + " bit";
-            
             const ratio = ((1 - (compressedBits / originalBits)) * 100).toFixed(1);
             document.getElementById('compressionRatio').innerText = (ratio > 0 ? ratio : 0) + "%";
-            document.getElementById('entropyValue').innerText = calculateEntropy(freqMap, totalChars) + " bit/belgi";
+            document.getElementById('entropyValue').innerText = (Math.log2(Object.keys(freqMap).length)).toFixed(2);
 
             document.getElementById('binaryStream').innerText = encodedStream;
-            document.getElementById('decodedText').innerText = decoded;
+            document.getElementById('modalBinaryStream').innerText = encodedStream;
+            document.getElementById('modalDecodedText').innerText = decoded;
+            document.getElementById('modalFreqTableBody').innerHTML = tableHtml;
+            document.getElementById('modalInputText').value = text;
 
-            renderTree(root);
+            renderTree(root, 'treeSvg');
+            renderTree(root, 'modalTreeSvg');
         }
 
-        function renderTree(root) {
-            const svg = document.getElementById('treeSvg');
+        function renderTree(root, targetSvgId) {
+            const svg = document.getElementById(targetSvgId);
             svg.innerHTML = '';
-
             if (!root) return;
 
-            const svgWidth = svg.clientWidth || 500;
-            const svgHeight = svg.clientHeight || 380;
-
-            function calculatePositions(node, depth = 0, leftBoundary = 0, rightBoundary = svgWidth) {
+            const width = svg.clientWidth || 500;
+            function calcPos(node, depth = 0, left = 0, right = width) {
                 if (!node) return [];
-
-                const x = (leftBoundary + rightBoundary) / 2;
-                const y = 35 + depth * 55;
-
-                node.x = x;
-                node.y = y;
-
-                let nodes = [{ node, x, y, depth }];
-
-                if (node.left) {
-                    nodes = nodes.concat(calculatePositions(node.left, depth + 1, leftBoundary, x));
-                }
-                if (node.right) {
-                    nodes = nodes.concat(calculatePositions(node.right, depth + 1, x, rightBoundary));
-                }
-
-                return nodes;
+                const x = (left + right) / 2;
+                const y = 30 + depth * 50;
+                node.x = x; node.y = y;
+                let list = [{ node, x, y }];
+                if (node.left) list = list.concat(calcPos(node.left, depth + 1, left, x));
+                if (node.right) list = list.concat(calcPos(node.right, depth + 1, x, right));
+                return list;
             }
 
-            const allNodes = calculatePositions(root);
-
-            function drawEdges(node) {
+            const nodes = calcPos(root);
+            function drawLines(node) {
                 if (!node) return;
-
-                if (node.left) {
-                    createLine(node.x, node.y, node.left.x, node.left.y, "0");
-                    drawEdges(node.left);
-                }
-                if (node.right) {
-                    createLine(node.x, node.y, node.right.x, node.right.y, "1");
-                    drawEdges(node.right);
-                }
+                if (node.left) { createLine(svg, node.x, node.y, node.left.x, node.left.y, "0"); drawLines(node.left); }
+                if (node.right) { createLine(svg, node.x, node.y, node.right.x, node.right.y, "1"); drawLines(node.right); }
             }
+            drawLines(root);
 
-            function createLine(x1, y1, x2, y2, label) {
-                const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
-                line.setAttribute("x1", x1);
-                line.setAttribute("y1", y1);
-                line.setAttribute("x2", x2);
-                line.setAttribute("y2", y2);
-                line.setAttribute("class", "link");
-                svg.appendChild(line);
-
-                const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-                text.setAttribute("x", (x1 + x2) / 2 + (label === "0" ? -8 : 8));
-                text.setAttribute("y", (y1 + y2) / 2);
-                text.setAttribute("class", "link-label");
-                text.textContent = label;
-                svg.appendChild(text);
-            }
-
-            drawEdges(root);
-
-            allNodes.forEach(({ node, x, y }) => {
+            nodes.forEach(({ node, x, y }) => {
                 const g = document.createElementNS("http://www.w3.org/2000/svg", "g");
-                const isLeaf = node.char !== null;
-                g.setAttribute("class", `node ${isLeaf ? 'leaf' : ''}`);
-
+                g.setAttribute("class", `node ${node.char !== null ? 'leaf' : ''}`);
                 const circle = document.createElementNS("http://www.w3.org/2000/svg", "circle");
-                circle.setAttribute("cx", x);
-                circle.setAttribute("cy", y);
-                circle.setAttribute("r", isLeaf ? 15 : 13);
-
+                circle.setAttribute("cx", x); circle.setAttribute("cy", y); circle.setAttribute("r", 12);
                 const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
-                text.setAttribute("x", x);
-                text.setAttribute("y", y);
-                
-                const labelChar = node.char === ' ' ? '␣' : node.char;
-                text.textContent = isLeaf ? `${labelChar}:${node.freq}` : node.freq;
-
-                g.appendChild(circle);
-                g.appendChild(text);
-                svg.appendChild(g);
+                text.setAttribute("x", x); text.setAttribute("y", y);
+                text.textContent = node.char !== null ? (node.char === ' ' ? '␣' : node.char) : node.freq;
+                g.appendChild(circle); g.appendChild(text); svg.appendChild(g);
             });
+        }
+
+        function createLine(svg, x1, y1, x2, y2, label) {
+            const line = document.createElementNS("http://www.w3.org/2000/svg", "line");
+            line.setAttribute("x1", x1); line.setAttribute("y1", y1); line.setAttribute("x2", x2); line.setAttribute("y2", y2);
+            line.setAttribute("class", "link"); svg.appendChild(line);
+            const text = document.createElementNS("http://www.w3.org/2000/svg", "text");
+            text.setAttribute("x", (x1 + x2) / 2); text.setAttribute("y", (y1 + y2) / 2);
+            text.setAttribute("class", "link-label"); text.textContent = label; svg.appendChild(text);
+        }
+
+        function openModal(id) { document.getElementById(id).style.display = 'block'; }
+        function closeModal(id) { document.getElementById(id).style.display = 'none'; }
+
+        function syncInputAndProcess() {
+            document.getElementById('inputText').value = document.getElementById('modalInputText').value;
+            processHuffman();
+            closeModal('modalInput');
         }
 
         function loadSampleText() {
@@ -726,88 +558,71 @@
             processHuffman();
         }
 
-        function handleFileUpload(event) {
-            const file = event.target.files[0];
+        function handleFileUpload(e) {
+            const file = e.target.files[0];
             if (!file) return;
-
-            const reader = new FileReader();
-            reader.onload = function(e) {
-                document.getElementById('inputText').value = e.target.result;
-                processHuffman();
-            };
-            reader.readAsText(file);
-        }
-
-        function copyToClipboard(elementId) {
-            const text = document.getElementById(elementId).innerText;
-            navigator.clipboard.writeText(text).then(() => {
-                alert("Matn buferga nusxalandi!");
-            });
+            const r = new FileReader();
+            r.onload = function(evt) { document.getElementById('inputText').value = evt.target.result; processHuffman(); };
+            r.readAsText(file);
         }
 
         function exportReport() {
-            let report = "=== XAFFMAN KODLASH VA MA'LUMOTLARNI SIQISH HISOBOTI ===\n";
-            report += "Bajaruvchilar: Muhammadiv Diyorbek & Mirzaliyev Oyatullo\n\n";
-            report += "ASL MATN:\n" + globalCurrentData.text + "\n\n";
-            report += "STATISTIKA:\n";
-            report += "- Asl hajm: " + globalCurrentData.originalBits + " bit\n";
-            report += "- Siqilgan hajm: " + globalCurrentData.compressedBits + " bit\n";
-            report += "- Siqish koeffitsienti: " + document.getElementById('compressionRatio').innerText + "\n";
-            report += "- Entropiya: " + document.getElementById('entropyValue').innerText + "\n\n";
-            report += "BELGILARNING XAFFMAN KODLARI:\n";
-            
-            for (let char in globalCurrentData.codes) {
-                report += `'${char}': ${globalCurrentData.codes[char]} (Chastota: ${globalCurrentData.freqMap[char]})\n`;
-            }
-
-            report += "\nKODLANGAN BITSTREAM:\n" + globalCurrentData.binaryStream + "\n";
-
-            const blob = new Blob([report], { type: 'text/plain;charset=utf-8' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'Xaffman_Hisobot_Diyorbek_Oyatullo.txt';
-            a.click();
-            URL.revokeObjectURL(url);
+            let txt = `XAFFMAN HISOBOTI\nMualliflar: Muhammadiv Diyorbek & Mirzaliyev Oyatullo\nAsl hajm: ${globalData.originalBits} bit\nSiqilgan hajm: ${globalData.compressedBits} bit\nStream: ${globalData.binaryStream}`;
+            const b = new Blob([txt], { type: 'text/plain' });
+            const a = document.createElement('a'); a.href = URL.createObjectURL(b); a.download = 'Xaffman_Hisobot.txt'; a.click();
         }
 
-        // Ovozli Tushuntirish funksiyasi (Web Speech API)
+        // KAFOLATLANGAN TELEFON VA KOMPYUTER OVOZLI YORDAMCHISI
+        const speechParagraphs = [
+            "Assalomu alaykum ustoz. Ushbu kurs ishi loyihasi Muhammadiv Diyorbek va Mirzaliyev Oyatullo tomonidan bajarilgan.",
+            "Loyiha ma'lumotlarni siqish uchun Xaffman kodlash ierarxik daraxtini qurish deb ataladi.",
+            "Birinchi oynada matn kiritiladi. Ikkinchi oynada harflarning uchrash chastotalari va axborot entropiyasi hisoblanadi.",
+            "Uchinchi oynada Min-Heap algoritmi asosida qurilgan interaktiv Xaffman daraxti visual ko'rsatiladi.",
+            "To'rtinchi oynada esa matnning ikkilik bitstream ko'rinishi va uni qayta tiklash namoyish etiladi. E'tiboringiz uchun rahmat!"
+        ];
+
         function playVoiceExplanation() {
-            if (!('speechSynthesis' in window)) {
-                alert("Sizning brauzeringiz ovozli sintezni qo'llab-quvvatlamaydi.");
-                return;
+            stopVoiceExplanation();
+            let index = 0;
+            const subBox = document.getElementById('subtitleBox');
+
+            function speakNext() {
+                if (index >= speechParagraphs.length) {
+                    subBox.innerText = "Tushuntirish yakunlandi!";
+                    return;
+                }
+
+                const text = speechParagraphs[index];
+                subBox.innerText = text;
+
+                if ('speechSynthesis' in window) {
+                    const utterance = new SpeechSynthesisUtterance(text);
+                    utterance.lang = 'uz-UZ';
+                    utterance.rate = 0.95;
+                    utterance.onend = function() {
+                        index++;
+                        speakNext();
+                    };
+                    utterance.onerror = function() {
+                        index++;
+                        speechTimer = setTimeout(speakNext, 3500);
+                    };
+                    window.speechSynthesis.speak(utterance);
+                } else {
+                    index++;
+                    speechTimer = setTimeout(speakNext, 3500);
+                }
             }
-
-            window.speechSynthesis.cancel(); // Avvalgi ovozni to'xtatish
-
-            const explanationText = `
-                Assalomu alaykum ustoz. Ushbu kurs ishi loyihasi Muhammadiv Diyorbek va Mirzaliyev Oyatullo tomonidan bajarilgan.
-                Loyiha Xaffman kodlash va ma'lumotlarni siqish ierarxik daraxti deb ataladi.
-                Birinchi oynada matn kiritiladi yoki matnli fayl yuklanadi.
-                Ikkinchi oynada harflarning uchrash chastotalari, ehtimolliklari va axborot entropiya qiymati hisoblanadi.
-                Uchinchi oynada Min-Heap algoritmi asosida qurilgan interaktiv xaffman daraxti vizual tarzda ko'rsatiladi. Chap tarmoqlarga nol, o'ng tarmoqlarga bir qiymatlari berilib optimal kodlar hosil qilinadi.
-                To'rtinchi oynada esa matnning ikkilik bitstream ko'rinishi va uni yana asl holatiga xatosiz dekodlash jarayoni namoyish etiladi.
-                E'tiboringiz uchun rahmat!
-            `;
-
-            const utterance = new SpeechSynthesisUtterance(explanationText);
-            utterance.lang = 'uz-UZ'; // O'zbek tili
-            utterance.rate = 0.95; // O'qish tezligi
-            utterance.pitch = 1.0;
-
-            // Agar uz-UZ topilmasa tr-TR yoki ru-RU o'rniga umumiy o'qishga harakat qiladi
-            window.speechSynthesis.speak(utterance);
+            speakNext();
         }
 
         function stopVoiceExplanation() {
-            if ('speechSynthesis' in window) {
-                window.speechSynthesis.cancel();
-            }
+            if ('speechSynthesis' in window) window.speechSynthesis.cancel();
+            if (speechTimer) clearTimeout(speechTimer);
+            document.getElementById('subtitleBox').innerText = "Tushuntirish to'xtatildi.";
         }
 
-        window.onload = function() {
-            processHuffman();
-        };
+        window.onload = function() { processHuffman(); };
     </script>
 </body>
 </html>
